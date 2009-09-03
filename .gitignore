@@ -3,4 +3,4 @@
 coverage
 rdoc
 pkg
-test/test_credentials.yml
+test/config/test_credentials.yml

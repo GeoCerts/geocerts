@@ -1,7 +1,7 @@
 require 'yaml'
 
 begin
-  credentials         = YAML.load_file(File.dirname(__FILE__) + '/../test_credentials.yml')
+  credentials         = YAML.load_file(File.dirname(__FILE__) + '/../config/test_credentials.yml')
   GeoCerts.login      = credentials['login']
   GeoCerts.api_token  = credentials['api_token']
 rescue Errno::ENOENT, LoadError
