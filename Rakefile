@@ -10,7 +10,13 @@ begin
     gem.email = "git@nathanielbibler.com"
     gem.homepage = "http://github.com/nbibler/geocerts"
     gem.authors = ["Nathaniel Bibler"]
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    
+    gem.add_dependency('relax', '~>0.1.2')
+    
+    gem.add_development_dependency('thoughtbot-shoulda', '~>2.10.1')
+    gem.add_development_dependency('mocha', '~>0.9.5')
+    gem.add_development_dependency('fakeweb', '~>1.2.2')
+    
   end
 
 rescue LoadError
