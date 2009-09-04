@@ -197,6 +197,36 @@ Connection: close
 </errors>
 |
     
+    Validation = %|HTTP/1.1 200 OK
+Date: Thu, 03 Sep 2009 16:23:03 GMT
+Server: Mongrel 1.1.3
+Status: 200 OK
+Cache-Control: no-cache
+Content-Type: application/xml; charset=utf-8
+Content-Length: 534
+Vary: Accept-Encoding
+Connection: close
+
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+<total-price type="float">69</total-price>
+<csr>
+<common-name>www.example.com</common-name>
+<city>Atlanta</city>
+<state>GA</state>
+<country>US</country>
+<organization>GeoCerts Inc</organization>
+<org-unit>Internet</org-unit>
+</csr>
+<renewal-info>
+<indicator type="boolean">true</indicator>
+<months type="integer">1</months>
+<serial-number>abC12De</serial-number>
+<order-id>1234ab</order-id>
+<expiration-date type="datetime">2009-01-01T00:00:00Z</expiration-date>
+</renewal-info>
+</order>
+|
   end
   
 end
