@@ -4,18 +4,19 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "geocerts"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "git@nathanielbibler.com"
-    gem.homepage = "http://github.com/nbibler/geocerts"
-    gem.authors = ["Nathaniel Bibler"]
+    gem.name        = "GeoCerts"
+    gem.summary     = %Q{A Ruby library for interfacing with the GeoCerts REST API}
+    gem.description = %Q{A Ruby library for interfacing with the GeoCerts REST API}
+    gem.email       = "support@geocerts.com"
+    gem.homepage    = "http://www.geocerts.com/"
+    gem.authors     = ["GeoCerts, Inc."]
     
-    gem.add_dependency('relax', '~>0.1.2')
+    gem.add_dependency('relax', '>=0.1.2')
     
-    gem.add_development_dependency('thoughtbot-shoulda', '~>2.10.1')
-    gem.add_development_dependency('mocha', '~>0.9.5')
-    gem.add_development_dependency('fakeweb', '~>1.2.2')
+    gem.add_development_dependency('thoughtbot-shoulda',      '>=2.10.2')
+    gem.add_development_dependency('thoughtbot-factory_girl', '>=1.2.2')
+    gem.add_development_dependency('mocha',                   '>=0.9.5')
+    gem.add_development_dependency('fakeweb',                 '>=1.2.2')
     
   end
 
