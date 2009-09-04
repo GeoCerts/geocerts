@@ -5,7 +5,7 @@ if ENV['REMOTE_TESTS'] =~ /(yes|y|true|t)/i
   puts '*****'
   $perform_remote_tests = true
 else
-  puts 'Testing will be performed against mocked responses.'
+  puts '== Testing will be performed against *mocked* server responses.'
   $perform_remote_tests = false
 end
 puts ''
