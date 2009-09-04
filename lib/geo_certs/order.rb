@@ -1,10 +1,17 @@
+require 'cgi'
+require 'geo_certs/order/administrator'
+require 'geo_certs/order/extended_validation_approver'
+require 'geo_certs/order/organization'
+require 'geo_certs/order/renewal_information'
+
 module GeoCerts
   
   ##
   # Contains the details, attributes, and methods to interact with a GeoCerts order.
   # 
   class Order
-    attr_accessor :completed_at,
+    attr_accessor :approver_email,
+                  :completed_at,
                   :created_at,
                   :domain, 
                   :geotrust_order_id,
@@ -16,7 +23,10 @@ module GeoCerts
                   :status_minor,
                   :total_price,
                   :years
-    attr_reader   :csr,
+    attr_reader   :administrator,
+                  :csr,
+                  :ev_approver,
+                  :organization,
                   :pending_audit,
                   :product,
                   :renewal,
@@ -56,9 +66,8 @@ module GeoCerts
     
     
     def initialize(attributes = {})
-      attributes.each_pair do |name, value|
-        send("#{name}=", value) if respond_to?(name)
-      end
+      update_attributes(attributes)
+      yield(self) if block_given?
     end
     
     def modify!(action)
@@ -75,11 +84,11 @@ module GeoCerts
     
     def validate
       parameters = {}
-      parameters[:csr_body]     = CGI.escape(self.csr.body) if self.csr
-      parameters[:product_sku]  = self.product.sku if self.product
       parameters[:years]        = self.years
       parameters[:licenses]     = self.licenses
       parameters[:sans]         = CGI.escape(self.sans) if self.sans
+      parameters.merge!(self.csr.to_geocerts_hash)      if self.csr
+      parameters.merge!(self.product.to_geocerts_hash)  if self.product
       
       Order.new(self.class.call_api {GeoCerts.api.validate_order(parameters)[:order]})
     end
@@ -89,7 +98,7 @@ module GeoCerts
     end
     
     def new_record?
-      !self.id.nil?
+      self.id.nil?
     end
     
     alias :pending_audit? :pending_audit
@@ -130,6 +139,42 @@ module GeoCerts
       @product = input if input.kind_of?(Product)
     end
     
+    def approver=(input)
+      case input
+      when Approver
+        @approver = input
+      when Hash
+        @approver = Approver.new(input)
+      end
+    end
+    
+    def ev_approver=(input)
+      case input
+      when ExtendedValidationApprover
+        @ev_approver = input
+      when Hash
+        @ev_approver = ExtendedValidationApprover.new(input)
+      end
+    end
+    
+    def administrator=(input)
+      case input
+      when Administrator
+        @administrator = input
+      when Hash
+        @administrator = Administrator.new(input)
+      end
+    end
+    
+    def organization=(input)
+      case input
+      when Organization
+        @organization = input
+      when Hash
+        @organization = Organization.new(input)
+      end
+    end
+    
     def warnings=(input) # :nodoc:
       case input
       when Hash
@@ -142,11 +187,19 @@ module GeoCerts
     
     
     def create
-      self.class.call_api do
-        GeoCerts.api.create({
-          
-        })
-      end
+      parameters = {}
+      parameters[:approver_email]   = self.approver_email
+      parameters[:years]            = self.years
+      parameters[:licenses]         = self.licenses
+      parameters[:sans]             = CGI.escape(self.sans)   if self.sans
+      parameters.merge!(self.csr.to_geocerts_hash)            if self.csr
+      parameters.merge!(self.product.to_geocerts_hash)        if self.product
+      parameters.merge!(self.ev_approver.to_geocerts_hash)    if self.ev_approver
+      parameters.merge!(self.administrator.to_geocerts_hash)  if self.administrator
+      parameters.merge!(self.organization.to_geocerts_hash)   if self.organization
+      
+      update_attributes(self.class.call_api {GeoCerts.api.create_order(parameters)[:order]})
+      self
     end
     
     def self.build_collection(response)
@@ -177,7 +230,13 @@ module GeoCerts
     rescue *GeoCerts::HTTP_ERRORS
       raise GeoCerts::ConnectionError.new($!.message)
     end
-
+    
+    def update_attributes(attributes)
+      attributes.each_pair do |name, value|
+        send("#{name}=", value) if respond_to?(name)
+      end
+    end
+    
   end
   
 end

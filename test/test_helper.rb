@@ -8,6 +8,7 @@ require 'test/unit'
 require 'uri'
 require 'shoulda'
 require 'factory_girl'
+require 'factories'
 # require 'mocha'
 
 # Load any initializers for testing.

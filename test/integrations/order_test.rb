@@ -236,7 +236,14 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     
     context 'create' do
       
+      setup do
+        @order = GeoCerts::Order.new(Factory.attributes_for(:order))
+      end
+      
       should 'return a GeoCerts::Order on success' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+          assert_kind_of GeoCerts::Order, @order.save
+        end
       end
       
     end

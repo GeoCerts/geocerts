@@ -95,6 +95,27 @@ ORDER
             end
             
             action :create_order, :url => '/orders.xml', :method => :post do
+              parameter 'order[years]',                   :as => :years
+              parameter 'order[licenses]',                :as => :licenses
+              parameter 'order[dns_names]',               :as => :sans
+              parameter 'order[approver_email]',          :as => :approver_email
+              
+              parameter 'order[product][sku]',            :as => :product_sku
+              parameter 'order[csr][body]',               :as => :csr_body
+              
+              parameter 'order[ev_approver][first_name]', :as => :ev_approver_first_name
+              parameter 'order[ev_approver][last_name]',  :as => :ev_approver_last_name
+              parameter 'order[ev_approver][title]',      :as => :ev_approver_title
+              parameter 'order[ev_approver][phone]',      :as => :ev_approver_phone
+              parameter 'order[ev_approver][email]',      :as => :ev_approver_email
+              
+              parameter 'order[organization][organization_name]', :as => :organization_name
+              parameter 'order[organization][address]',           :as => :organization_address
+              parameter 'order[organization][city]',              :as => :organization_city
+              parameter 'order[organization][state]',             :as => :organization_state
+              parameter 'order[organization][postal_code]',       :as => :organization_postal_code
+              parameter 'order[organization][phone]',             :as => :organization_phone
+              
               parser Parsers::OrderParser do
                 element :order do
                   eval(ELEMENTS)
@@ -107,7 +128,7 @@ ORDER
               parameter 'order[csr][body]',     :as => :csr_body
               parameter 'order[years]',         :as => :years
               parameter 'order[licenses]',      :as => :licenses
-              parameter 'order[dns-names]',     :as => :sans
+              parameter 'order[dns_names]',     :as => :sans
               
               parser Parsers::OrderParser do
                 element :order do

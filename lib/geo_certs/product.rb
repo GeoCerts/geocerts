@@ -13,6 +13,10 @@ module GeoCerts
       self.max_years  = attributes[:max_years]
     end
     
+    def to_geocerts_hash
+      { :product_sku => self.sku }
+    end
+    
   end
   
 end

@@ -1,3 +1,5 @@
+require 'cgi'
+
 module GeoCerts
   
   ##
@@ -18,6 +20,10 @@ module GeoCerts
       attributes.each_pair do |name, value|
         send("#{name}=", value) if respond_to?(name)
       end
+    end
+    
+    def to_geocerts_hash
+      { :csr_body => CGI.escape(self.body) }
     end
     
   end
