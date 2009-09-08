@@ -1,6 +1,10 @@
 module GeoCerts
   class Order < ApiObject
     
+    ##
+    # Used for setting or retrieving the required approver information when using extended 
+    # validation certificates in a GeoCerts::Order.
+    # 
     class ExtendedValidationApprover < Contact
       
       def to_geocerts_hash

@@ -1,6 +1,10 @@
 module GeoCerts
   class Order < ApiObject
     
+    ##
+    # Used for setting or retrieving the Contact information associated with a 
+    # GeoCerts::Order.
+    # 
     class Contact
       
       attr_accessor :email,

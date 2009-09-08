@@ -2,6 +2,11 @@ require 'geo_certs/api_object'
 
 module GeoCerts
   
+  ##
+  # Contains the information for a secure server certificate.  Generally, these objects would
+  # be created and populated via GeoCerts::Order.certificate, unless you are looking for a 
+  # listing of certificates in your account (see GeoCerts::Certificate.all).
+  # 
   class Certificate < ApiObject
     
     attr_accessor :order_id,

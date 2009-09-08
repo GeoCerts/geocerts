@@ -6,16 +6,16 @@ more.
 
 == Simple example
 
-		require 'geo_certs'
-		
-		GeoCerts.login 			= 'example'
-		GeoCerts.api_token 	= 'abd123DEfg.....'
-		
-		begin
-			GeoCerts::Order.all	# => [ GeoCerts::Order, GeoCerts::Order, ... ]
-		rescue GeoCerts::Exception
-			puts $!.to_s
-		end
+  require 'geo_certs'
+  
+  GeoCerts.login      = 'example'
+  GeoCerts.api_token  = 'abd123DEfg.....'
+  
+  begin
+    GeoCerts::Order.all	# => [ GeoCerts::Order, GeoCerts::Order, ... ]
+  rescue GeoCerts::Exception
+    puts $!.to_s
+  end
 
 == Exceptions
 
@@ -42,4 +42,4 @@ headers, and response body).
 
 == Copyright
 
-Copyright (c) 2009 GeoCerts Inc. See LICENSE for details.
+Copyright (c) 2009 {GeoCerts Inc.}[http://www.geocerts.com/]. See LICENSE for details.

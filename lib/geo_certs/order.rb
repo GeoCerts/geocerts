@@ -189,6 +189,13 @@ module GeoCerts
       GeoCerts::Event.for_order(self.id)
     end
     
+    ##
+    # Returns a GeoCerts::Certificate associated with this order.
+    # 
+    def certificate
+      GeoCerts::Certificate.find(self.id)
+    end
+    
     
     private
     

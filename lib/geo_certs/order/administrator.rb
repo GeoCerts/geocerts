@@ -3,6 +3,9 @@ require 'geo_certs/order/contact'
 module GeoCerts
   class Order < ApiObject
     
+    ##
+    # Used for setting or retrieving the Administrator associated with a GeoCerts::Order.
+    # 
     class Administrator < Contact
       
       def to_geocerts_hash

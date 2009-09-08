@@ -1,5 +1,10 @@
 module GeoCerts
   
+  ##
+  # GeoCerts tracks events which occur that are related to your Order(s).  This class 
+  # interfaces with those events to provide collections of all of your events or events
+  # against a particular GeoCerts::Order.
+  # 
   class Event < ApiObject
     
     attr_accessor :id,
