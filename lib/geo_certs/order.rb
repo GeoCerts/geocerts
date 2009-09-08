@@ -1,4 +1,5 @@
 require 'cgi'
+require 'geo_certs/api_object'
 require 'geo_certs/order/administrator'
 require 'geo_certs/order/extended_validation_approver'
 require 'geo_certs/order/organization'
@@ -9,7 +10,8 @@ module GeoCerts
   ##
   # Contains the details, attributes, and methods to interact with a GeoCerts order.
   # 
-  class Order
+  class Order < ApiObject
+    
     attr_accessor :approver_email,
                   :completed_at,
                   :created_at,
@@ -34,10 +36,13 @@ module GeoCerts
                   :trial,
                   :warnings
     
+    force_boolean :pending_audit,
+                  :renewal,
+                  :trial
     
     def self.all
       response = call_api { GeoCerts.api.orders }
-      build_collection(response)
+      build_collection(response) { |response| response[:orders][:order] }
     end
     
     def self.find(id)
@@ -65,21 +70,22 @@ module GeoCerts
     end
     
     
-    def initialize(attributes = {})
-      update_attributes(attributes)
-      yield(self) if block_given?
-    end
-    
     def modify!(action)
-      self.class.call_api { GeoCerts.api.modify_order(:id => self.id, :state => action) }
+      update_attributes(self.class.call_api {
+        GeoCerts.api.modify_order(:id => self.id, :state => action)
+      })
     end
     
     def resend_approval_email!
-      self.class.call_api { GeoCerts.api.resend_approval_email(:id => self.id) }
+      update_attributes(self.class.call_api {
+        GeoCerts.api.resend_approval_email(:id => self.id)
+      })
     end
     
     def change_approver_email!(email)
-      self.class.call_api { GeoCerts.api.change_order_approval_email(:id => self.id, :approver_email => email) }
+      update_attributes(self.class.call_api {
+        GeoCerts.api.change_order_approval_email(:id => self.id, :approver_email => email)
+      })
     end
     
     def validate
@@ -99,22 +105,6 @@ module GeoCerts
     
     def new_record?
       self.id.nil?
-    end
-    
-    alias :pending_audit? :pending_audit
-    alias :renewal?       :renewal
-    alias :trial?         :trial
-    
-    def pending_audit=(input) # :nodoc:
-      @pending_audit = !!(input =~ /true/i)
-    end
-    
-    def renewal=(input) # :nodoc:
-      @renewal = !!(input =~ /true/i)
-    end
-    
-    def trial=(input) # :nodoc:
-      @trial = !!(input =~ /true/i)
     end
     
     def csr=(input)
@@ -200,41 +190,6 @@ module GeoCerts
       
       update_attributes(self.class.call_api {GeoCerts.api.create_order(parameters)[:order]})
       self
-    end
-    
-    def self.build_collection(response)
-      collection  = Collection.new
-      collection.start_at = response[:start_at]
-      collection.end_at   = response[:end_at]
-      response[:orders][:order].each { |order| collection << new(order) }
-      collection
-    end
-    
-    def self.call_api
-      yield if block_given?
-    rescue RestClient::ResourceNotFound
-      raise GeoCerts::ResourceNotFound.new($!)
-    rescue RestClient::Unauthorized
-      raise GeoCerts::Unauthorized.new($!)
-    rescue RestClient::RequestFailed
-      case $!.http_code
-      when 422
-        raise GeoCerts::UnprocessableEntity.new($!)
-      when 400
-        raise GeoCerts::BadRequest.new($!)
-      else
-        raise GeoCerts::RequestFailed.new($!)
-      end
-    rescue RestClient::RequestTimeout
-      raise GeoCerts::RequestTimeout.new($!.message)
-    rescue *GeoCerts::HTTP_ERRORS
-      raise GeoCerts::ConnectionError.new($!.message)
-    end
-    
-    def update_attributes(attributes)
-      attributes.each_pair do |name, value|
-        send("#{name}=", value) if respond_to?(name)
-      end
     end
     
   end

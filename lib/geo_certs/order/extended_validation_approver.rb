@@ -1,5 +1,5 @@
 module GeoCerts
-  class Order
+  class Order < ApiObject
     
     class ExtendedValidationApprover < Contact
       

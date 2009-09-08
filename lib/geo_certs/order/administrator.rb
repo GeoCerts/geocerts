@@ -1,7 +1,7 @@
 require 'geo_certs/order/contact'
 
 module GeoCerts
-  class Order
+  class Order < ApiObject
     
     class Administrator < Contact
       

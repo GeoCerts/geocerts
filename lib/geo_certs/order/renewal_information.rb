@@ -1,5 +1,5 @@
 module GeoCerts
-  class Order
+  class Order < ApiObject
     
     ##
     # Organizes any renewal information received back about an Order.
