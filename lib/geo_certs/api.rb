@@ -5,8 +5,10 @@ require 'geo_certs/csr'
 require 'geo_certs/product'
 require 'geo_certs/order'
 require 'geo_certs/certificate'
+require 'geo_certs/agreement'
 require 'geo_certs/endpoints/orders'
 require 'geo_certs/endpoints/certificates'
+require 'geo_certs/endpoints/agreements'
 require 'geo_certs/endpoints/products'
 
 module GeoCerts
@@ -19,6 +21,7 @@ module GeoCerts
     include Endpoints::Orders
     include Endpoints::Certificates
     include Endpoints::Products
+    include Endpoints::Agreements
   end
   
 end

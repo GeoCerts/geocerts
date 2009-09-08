@@ -33,6 +33,15 @@ module GeoCerts
       self.code       = attributes[:code]
     end
     
+    ##
+    # Returns the GeoCerts::Agreement for this product.
+    # 
+    def user_agreement
+      GeoCerts::Agreement.new(self.class.call_api {
+        GeoCerts.api.agreement(:product_id => self.code)
+      })
+    end
+    
     def to_geocerts_hash
       { :product_sku => self.sku }
     end
