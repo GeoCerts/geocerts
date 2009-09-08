@@ -4,7 +4,9 @@ require 'geo_certs/email'
 require 'geo_certs/csr'
 require 'geo_certs/product'
 require 'geo_certs/order'
+require 'geo_certs/certificate'
 require 'geo_certs/endpoints/orders'
+require 'geo_certs/endpoints/certificates'
 
 module GeoCerts
   
@@ -14,6 +16,7 @@ module GeoCerts
     ENDPOINT = "https://api-test.geocerts.com/:version"
     
     include Endpoints::Orders
+    include Endpoints::Certificates
   end
   
 end
