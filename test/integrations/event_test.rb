@@ -30,6 +30,12 @@ class GeoCerts::EventTest < Test::Unit::TestCase
         end
       end
       
+      should 'modify the queried window of time' do
+        managed_server_request :get, 'https://api-test.geocerts.com/1/events.xml?start_at=2009-01-01T00:00:00+00:00&end_at=2009-01-02T00:00:00+00:00', :response => Responses::Event::All do
+          GeoCerts::Event.all(:start_at => DateTime.parse('2009-01-01T00:00:00Z'), :end_at => DateTime.parse('2009-01-02T00:00:00Z'))
+        end
+      end
+      
     end
     
     context 'all for an order' do
@@ -75,6 +81,12 @@ class GeoCerts::EventTest < Test::Unit::TestCase
           exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders/422815/events.xml', :response => Responses::Event::Order do
             assert_kind_of(GeoCerts::Event, GeoCerts::Order.find(422815).events.first)
           end
+        end
+      end
+      
+      should 'modify the queried window of time' do
+        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders/422815/events.xml?start_at=2009-01-01T00:00:00+00:00&end_at=2009-01-02T00:00:00+00:00', :response => Responses::Certificate::All do
+          GeoCerts::Event.for_order(422815, :start_at => DateTime.parse('2009-01-01T00:00:00Z'), :end_at => DateTime.parse('2009-01-02T00:00:00Z'))
         end
       end
       

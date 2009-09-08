@@ -26,10 +26,17 @@ module GeoCerts
     force_boolean :trial
     
     ##
-    # Returns all certificates for a given window of time.
+    # Returns all certificates for a given window of time.  The server defaults to a 1 month
+    # window.
     # 
-    def self.all
-      response = call_api { GeoCerts.api.certificates }
+    # === Options
+    # 
+    # :start_at:: The starting DateTime for the date range
+    # :end_at:: The ending DateTime for the date range
+    # 
+    def self.all(options = {})
+      prep_date_ranges!(options)
+      response = call_api { GeoCerts.api.certificates(options) }
       build_collection(response) { |response| response[:certificates][:certificate] }
     end
     

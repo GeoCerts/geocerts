@@ -66,7 +66,13 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal DateTime.parse('2009-08-04T11:56:44-04:00'), GeoCerts::Order.all.start_at
         end
       end
-    
+      
+      should 'modify the query range' do
+        managed_server_request :get, 'https://api-test.geocerts.com/1/orders.xml?end_at=2009-01-02T00:00:00+00:00&start_at=2009-01-01T00:00:00+00:00', :response => Responses::Order::All do
+          GeoCerts::Order.all(:start_at => DateTime.parse('2009-01-01T00:00:00Z'), :end_at => DateTime.parse('2009-01-02T00:00:00Z'))
+        end
+      end
+      
     end
     
     context 'find' do

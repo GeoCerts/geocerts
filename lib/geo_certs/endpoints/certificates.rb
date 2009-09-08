@@ -30,6 +30,9 @@ CERTIFICATE
           endpoint GeoCerts::API::ENDPOINT do
             
             action :certificates, :url => '/certificates.xml' do
+              parameter :start_at
+              parameter :end_at
+              
               parser Parsers::OrderParser do
                 attribute 'start_at',             :as => :start_at,           :type => DateTime
                 attribute 'end_at',               :as => :end_at,             :type => DateTime

@@ -40,8 +40,18 @@ module GeoCerts
                   :renewal,
                   :trial
     
-    def self.all
-      response = call_api { GeoCerts.api.orders }
+    ##
+    # Returns all orders within the requested date range.  By default the server will 
+    # return orders within the past month (30 days).
+    # 
+    # === Options
+    # 
+    # :start_at:: The starting DateTime for the date range
+    # :end_at:: The ending DateTime for the date range
+    # 
+    def self.all(options = {})
+      prep_date_ranges!(options)
+      response = call_api { GeoCerts.api.orders(options) }
       build_collection(response) { |response| response[:orders][:order] }
     end
     

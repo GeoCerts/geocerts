@@ -54,6 +54,12 @@ class GeoCerts::CertificateTest < Test::Unit::TestCase
         end
       end
       
+      should 'modify the queried window of time' do
+        managed_server_request :get, 'https://api-test.geocerts.com/1/certificates.xml?start_at=2009-01-01T00:00:00+00:00&end_at=2009-01-02T00:00:00+00:00', :response => Responses::Certificate::All do
+          GeoCerts::Certificate.all(:start_at => DateTime.parse('2009-01-01T00:00:00Z'), :end_at => DateTime.parse('2009-01-02T00:00:00Z'))
+        end
+      end
+      
     end
     
     context 'find' do

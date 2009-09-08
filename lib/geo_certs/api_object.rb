@@ -54,6 +54,11 @@ module GeoCerts
       collection
     end
     
+    def self.prep_date_ranges!(options)
+      options[:start_at]  = options[:start_at].xmlschema  if options.has_key?(:start_at)  && options[:start_at].respond_to?(:xmlschema)
+      options[:end_at]    = options[:end_at].xmlschema    if options.has_key?(:end_at)    && options[:start_at].respond_to?(:xmlschema)
+    end
+    
     
     def update_attributes(attributes) # :nodoc:
       attributes.each_pair do |name, value|
