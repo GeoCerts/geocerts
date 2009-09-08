@@ -5,12 +5,13 @@ module GeoCerts
   # 
   class Product
     
-    attr_accessor :name, :sku, :max_years
+    attr_accessor :name, :sku, :max_years, :code
     
     def initialize(attributes = {})
       self.name       = attributes[:name]
       self.sku        = attributes[:sku]
       self.max_years  = attributes[:max_years]
+      self.code       = attributes[:code]
     end
     
     def to_geocerts_hash
