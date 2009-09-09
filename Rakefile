@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name        = "GeoCerts"
+    gem.name        = "geocerts"
     gem.summary     = %Q{A Ruby library for interfacing with the GeoCerts REST API}
     gem.description = %Q{A Ruby library for interfacing with the GeoCerts REST API}
     gem.email       = "support@geocerts.com"
