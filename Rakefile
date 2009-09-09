@@ -59,8 +59,10 @@ Rake::RDocTask.new do |rdoc|
   end
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "geocerts #{version}"
+  rdoc.title    = "geocerts #{version}"
+  rdoc.main     = "README.rdoc"
   rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('LICENSE*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
