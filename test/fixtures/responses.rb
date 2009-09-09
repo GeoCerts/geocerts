@@ -1,5 +1,24 @@
 module Responses
   
+  Unauthorized = %|HTTP/1.1 401 Unauthorized 
+Date: Wed, 09 Sep 2009 00:51:25 GMT 
+Server: Mongrel 1.1.3 
+Status: 401 Unauthorized 
+Cache-Control: no-cache 
+Content-Type: application/xml; charset=utf-8 
+Content-Length: 142 
+Vary: Accept-Encoding 
+Connection: close 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<errors>
+  <error>
+    <code></code>
+    <message>Authentication Failed</message>
+  </error>
+</errors>
+|
+  
   BadRequest = %|
 HTTP/1.1 400 Bad Request
 Date: Thu, 03 Sep 2009 15:53:28 GMT
