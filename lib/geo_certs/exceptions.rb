@@ -1,3 +1,4 @@
+require 'zlib'
 require 'geo_certs/errors'
 
 module GeoCerts
@@ -52,9 +53,9 @@ module GeoCerts
       if !response.respond_to?(:body)
         return @response
       elsif Hash.respond_to?(:from_xml)
-        build_objects_for(Hash.from_xml(response.body))
+        build_objects_for(Hash.from_xml(decode(response['content-encoding'], response.body)))
       else
-        build_objects_for(parse_errors(response.body))
+        build_objects_for(parse_errors(decode(response['content-encoding'], response.body)))
       end
       
       @response
@@ -80,6 +81,16 @@ module GeoCerts
         self.warnings << GeoCerts::Warning.new(:code => error['code'], :message => error['message'])
       end
     end
+    
+    def decode(content_encoding, body)
+			if content_encoding == 'gzip' and not body.empty?
+				Zlib::GzipReader.new(StringIO.new(body)).read
+			elsif content_encoding == 'deflate'
+				Zlib::Inflate.new.inflate(body)
+			else
+				body
+			end
+		end
     
   end
   
