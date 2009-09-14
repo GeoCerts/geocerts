@@ -51,4 +51,16 @@ class Test::Unit::TestCase
     end
   end
   
+  def assert_responds_without_exception(exception, *error_codes, &block)
+    raised = false
+    begin
+      yield
+      assert true # no exceptions were raised
+    rescue exception => e
+      flunk "A #{exception} exception was unexpectedly raised"
+    rescue Exception
+      assert true # it wasn't the watched for exception.
+    end
+  end
+  
 end

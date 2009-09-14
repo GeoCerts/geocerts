@@ -47,9 +47,26 @@ module GeoCerts
     
     ##
     # Returns the certificate for the given GeoCerts::Order
+    # 
+    # === Exceptions
+    # 
+    # This method will raise exceptions if the given +order_id+ cannot be found in the GeoCerts
+    # system.
+    # 
     def self.find(order_id)
       order_id = order_id.id if order_id.kind_of?(GeoCerts::Order)
       new(call_api { GeoCerts.api.find_certificate(:order_id => order_id)[:certificate] })
+    end
+    
+    ##
+    # Returns the certificate for the given GeoCerts::Order by ID.
+    # 
+    # If the +order_id+ cannot be found in the GeoCerts system, this method will return +nil+.
+    # 
+    def self.find_by_order_id(order_id)
+      find(order_id)
+    rescue GeoCerts::AllowableExceptionWithResponse
+      nil
     end
     
     

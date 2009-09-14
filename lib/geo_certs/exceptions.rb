@@ -6,6 +6,7 @@ module GeoCerts
   HTTP_ERRORS = [ Timeout::Error,
                   Errno::EINVAL,
                   Errno::ECONNRESET,
+                  Errno::ECONNREFUSED,
                   EOFError,
                   Net::HTTPBadResponse,
                   Net::HTTPHeaderSyntaxError,
@@ -94,6 +95,9 @@ module GeoCerts
     
   end
   
+  class AllowableExceptionWithResponse < ExceptionWithResponse; # :nodoc:
+  end
+  
   
   class Unauthorized        < ExceptionWithResponse # :nodoc:
   end
@@ -101,13 +105,13 @@ module GeoCerts
   class BadRequest          < ExceptionWithResponse # :nodoc:
   end
   
-  class UnprocessableEntity < ExceptionWithResponse # :nodoc:
+  class UnprocessableEntity < AllowableExceptionWithResponse # :nodoc:
   end
   
-  class ResourceNotFound    < ExceptionWithResponse # :nodoc:
+  class ResourceNotFound    < AllowableExceptionWithResponse # :nodoc:
   end
   
-  class RequestFailed       < ExceptionWithResponse # :nodoc:
+  class RequestFailed       < AllowableExceptionWithResponse # :nodoc:
   end
   
   class RequestTimeout      < Exception # :nodoc:

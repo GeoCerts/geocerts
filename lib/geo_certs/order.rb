@@ -196,7 +196,7 @@ module GeoCerts
     # Returns a collection of events for the order.
     # 
     def events
-      GeoCerts::Event.for_order(self.id)
+      GeoCerts::Event.find_by_order_id(self.id)
     end
     
     ##
