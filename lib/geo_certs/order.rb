@@ -178,7 +178,10 @@ module GeoCerts
     def warnings=(input) # :nodoc:
       case input
       when Hash
-        @warnings = input[:warning] if input.has_key?(:warning)
+        case input[:warning]
+        when Array
+          @warnings = input[:warning].collect { |warning| GeoCerts::Warning.new(warning) }
+        end
       end
     end
     
