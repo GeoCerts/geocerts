@@ -11,4 +11,5 @@ Factory.define :csr, :class => GeoCerts::CSR do |c|
 end
 
 Factory.define :product, :class => GeoCerts::Product do |p|
+  p.sku             'Q'
 end

@@ -118,12 +118,14 @@ module GeoCerts
     end
     
     def csr=(input)
-      case input
-      when CSR
-        @csr = input
-      when Hash
-        @csr = CSR.new(input)
-      end
+      @csr = case input
+        when CSR
+          input
+        when Hash
+          CSR.new(input)
+        when String
+          CSR.new({:body => input}) if input =~ /-----BEGIN CERTIFICATE REQUEST-----/
+        end
     end
     
     def renewal_information=(input)
@@ -136,16 +138,21 @@ module GeoCerts
     end
     
     def product=(input)
-      @product = input if input.kind_of?(Product)
+      @product = case input
+        when Product
+          input
+        when String
+          Product.find(input)
+        end
     end
     
     def approver=(input)
-      case input
-      when Approver
-        @approver = input
-      when Hash
-        @approver = Approver.new(input)
-      end
+      @approver = case input
+        when Approver
+          input
+        when Hash
+          Approver.new(input)
+        end
     end
     
     def ev_approver=(input)

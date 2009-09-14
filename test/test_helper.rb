@@ -9,7 +9,7 @@ require 'uri'
 require 'shoulda'
 require 'factory_girl'
 require 'factories'
-# require 'mocha'
+require 'mocha'
 
 # Load any initializers for testing.
 Dir[File.dirname(__FILE__) + '/config/initializers/**/*.rb'].sort.each do |initializer|
