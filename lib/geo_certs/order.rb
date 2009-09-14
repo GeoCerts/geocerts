@@ -55,8 +55,28 @@ module GeoCerts
       build_collection(response) { |response| response[:orders][:order] }
     end
     
+    ##
+    # Returns a GeoCerts order by the order +id+ given.
+    # 
+    # === Exceptions
+    # 
+    # If the +id+ cannot be found on the GeoCerts system, a GeoCerts::ResourceNotFound exception
+    # will be raised.
+    # 
     def self.find(id)
       new(call_api { GeoCerts.api.find_order(:id => id)[:order] })
+    end
+    
+    ##
+    # Similar to GeoCerts::Product.find, but instead of raising an exception when an order cannot
+    # be located, instead it will return +nil+.
+    # 
+    # See GeoCerts::Product.find for more information.
+    # 
+    def self.find_by_id(id)
+      find(id)
+    rescue GeoCerts::AllowableExceptionWithResponse
+      nil
     end
     
     def self.approvers(domain)
@@ -66,14 +86,52 @@ module GeoCerts
       collection
     end
     
+    ##
+    # Creates a new order on GeoCerts with the attributes given.
+    # 
+    # If the order cannot be successfully created, this method will return +false+.
+    # 
     def self.create(attributes = {})
+      create!(attributes)
+    rescue GeoCerts::AllowableExceptionWithResponse
+      false
+    end
+    
+    ##
+    # Creates a new order on GeoCerts with the attributes given.
+    # 
+    # === Exceptions
+    # 
+    # This method will raise a GeoCerts::UnprocessableEntity exception if the order cannot be 
+    # created.
+    # 
+    def self.create!(attributes = {})
       object = new(attributes)
       yield(object) if block_given?
       object.save
       object
     end
     
+    ##
+    # Validates an order with the attributes provided.  This method will also parse a given CSR
+    # body and populate the returned Order's CSR object with the parsed data.
+    # 
+    # If validation fails, this method will return +false+.
+    # 
     def self.validate(attributes = {})
+      validate!(attributes)
+    rescue GeoCerts::AllowableExceptionWithResponse
+      false
+    end
+    
+    ##
+    # See GeoCerts::Order.validate for more information.
+    # 
+    # === Exceptions
+    # 
+    # This method will raise GeoCerts::UnprocessableEntity if the order is invalid.
+    # 
+    def self.validate!(attributes = {})
       object = new(attributes)
       yield(object) if block_given?
       object.validate
