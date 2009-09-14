@@ -203,7 +203,7 @@ module GeoCerts
     # Returns a GeoCerts::Certificate associated with this order.
     # 
     def certificate
-      GeoCerts::Certificate.find(self.id)
+      GeoCerts::Certificate.find_by_order_id(self.id)
     end
     
     

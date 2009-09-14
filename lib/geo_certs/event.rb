@@ -37,13 +37,29 @@ module GeoCerts
     # :start_at:: The starting DateTime for the date range
     # :end_at:: The ending DateTime for the date range
     # 
-    def self.for_order(order_id, options = {})
+    # === Exceptions
+    # 
+    # This method will raise GeoCerts exceptions if the requested +order_id+ cannot be found.
+    # 
+    def self.find(order_id, options = {})
       prep_date_ranges!(options)
       order_id = order_id.id if order_id.kind_of?(GeoCerts::Order)
       options[:order_id]  = order_id
       build_collection(call_api { GeoCerts.api.order_events(options) }) { |response|
         response[:events][:event]
       }
+    end
+    
+    ##
+    # This method will not raise an exception for a missing +order_id+ in the GeoCerts system.  
+    # Instead, it will return an empty collection.
+    # 
+    # See GeoCerts::Event.find for more information.
+    # 
+    def self.find_by_order_id(order_id, options = {})
+      find(order_id, options)
+    rescue GeoCerts::AllowableExceptionWithResponse
+      []
     end
     
   end
