@@ -40,6 +40,32 @@ class GeoCerts::ProductTest < Test::Unit::TestCase
         end
       end
       
+      should 'raise a GeoCerts::ResourceNotFound exception' do
+        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+          assert_responds_with_exception(GeoCerts::ResourceNotFound) do
+            GeoCerts::Product.find('BADSKU')
+          end
+        end
+      end
+      
+    end
+    
+    context 'find_by_sku' do
+      
+      should 'return a GeoCerts::Product by SKU' do
+        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+          assert_equal('Q', GeoCerts::Product.find_by_sku('Q').sku)
+        end
+      end
+      
+      should 'raise a GeoCerts::ResourceNotFound exception' do
+        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+          assert_responds_without_exception(GeoCerts::ResourceNotFound) do
+            assert_nil GeoCerts::Product.find_by_sku('BADSKU')
+          end
+        end
+      end
+      
     end
     
   end

@@ -21,8 +21,25 @@ module GeoCerts
     ##
     # Returns a GeoCerts product by product SKU.
     # 
+    # === Exceptions
+    # 
+    # If the +sku+ cannot be located in the GeoCerts system, a GeoCerts::ResourceNotFound 
+    # exception is raised.
+    # 
     def self.find(sku)
-      all.detect { |product| product.sku == sku }
+      all.detect { |product| product.sku == sku } || raise(GeoCerts::ResourceNotFound, "No product was found matching \"#{sku}\" sku")
+    end
+    
+    ##
+    # Returns a GeoCerts product by product SKU.
+    # 
+    # This method returns +nil+ if the SKU cannot be found on the GeoCerts system and does not
+    # raise an exception for this event.
+    # 
+    def self.find_by_sku(sku)
+      find(sku)
+    rescue GeoCerts::AllowableExceptionWithResponse
+      nil
     end
     
     
