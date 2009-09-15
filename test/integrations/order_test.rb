@@ -488,7 +488,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
         end
       end
       
-      should 'fail with errors' do
+      should 'raise ResourceInvalid on failure' do
         managed_server_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::GenericFailure do
           assert_responds_with_exception(GeoCerts::ResourceInvalid, -12345) do
             GeoCerts::Order.validate!
