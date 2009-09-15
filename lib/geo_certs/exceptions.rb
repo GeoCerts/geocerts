@@ -111,6 +111,12 @@ module GeoCerts
   class ResourceNotFound    < AllowableExceptionWithResponse # :nodoc:
   end
   
+  class ResourceNotCreated  < Exception # :nodoc:
+  end
+  
+  class ResourceInvalid     < Exception # :nodoc:
+  end
+  
   class RequestFailed       < AllowableExceptionWithResponse # :nodoc:
   end
   

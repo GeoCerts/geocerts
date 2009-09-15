@@ -33,8 +33,7 @@ module GeoCerts
                   :product,
                   :renewal,
                   :renewal_information,
-                  :trial,
-                  :warnings
+                  :trial
     
     force_boolean :pending_audit,
                   :renewal,
@@ -91,10 +90,10 @@ module GeoCerts
     # 
     # If the order cannot be successfully created, this method will return +false+.
     # 
-    def self.create(attributes = {})
-      create!(attributes)
-    rescue GeoCerts::AllowableExceptionWithResponse
-      false
+    def self.create(attributes = {}, &block)
+      object = new(attributes, &block)
+      object.save
+      object
     end
     
     ##
@@ -105,11 +104,10 @@ module GeoCerts
     # This method will raise a GeoCerts::UnprocessableEntity exception if the order cannot be 
     # created.
     # 
-    def self.create!(attributes = {})
-      object = new(attributes)
-      yield(object) if block_given?
-      object.save
-      object
+    def self.create!(attributes = {}, &block)
+      instance = create(attributes, &block)
+      raise(ResourceNotCreated, instance.errors.collect { |e| e.message }.join(', ')) if instance.new_record?
+      instance
     end
     
     ##
@@ -118,10 +116,10 @@ module GeoCerts
     # 
     # If validation fails, this method will return +false+.
     # 
-    def self.validate(attributes = {})
-      validate!(attributes)
-    rescue GeoCerts::AllowableExceptionWithResponse
-      false
+    def self.validate(attributes = {}, &block)
+      object = new(attributes, &block)
+      object.validate
+      object
     end
     
     ##
@@ -131,10 +129,10 @@ module GeoCerts
     # 
     # This method will raise GeoCerts::UnprocessableEntity if the order is invalid.
     # 
-    def self.validate!(attributes = {})
-      object = new(attributes)
-      yield(object) if block_given?
-      object.validate
+    def self.validate!(attributes = {}, &block)
+      instance = validate(attributes, &block)
+      raise(ResourceInvalid, instance.errors.collect { |e| e.message }.join(', ')) unless instance.errors.empty?
+      instance
     end
     
     
@@ -164,11 +162,25 @@ module GeoCerts
       parameters.merge!(self.csr.to_geocerts_hash)      if self.csr
       parameters.merge!(self.product.to_geocerts_hash)  if self.product
       
-      Order.new(self.class.call_api {GeoCerts.api.validate_order(parameters)[:order]})
+      update_attributes(self.class.call_api {GeoCerts.api.validate_order(parameters)[:order]})
+    rescue GeoCerts::AllowableExceptionWithResponse
+      store_exception_errors_and_warnings($!)
+      false
+    end
+    
+    def validate!
+      validate
+      raise(GeoCerts::ResourceInvalid) unless self.errors.empty?
+      self
     end
     
     def save
       new_record? ? create : raise("Cannot update an existing Order")
+      self.errors.empty? ? self : false
+    end
+    
+    def save!
+      save ? self : raise(GeoCerts::ResourceNotCreated)
     end
     
     def new_record?
@@ -240,16 +252,6 @@ module GeoCerts
       end
     end
     
-    def warnings=(input) # :nodoc:
-      case input
-      when Hash
-        case input[:warning]
-        when Array
-          @warnings = input[:warning].collect { |warning| GeoCerts::Warning.new(warning) }
-        end
-      end
-    end
-    
     ##
     # Returns a collection of events for the order.
     # 
@@ -281,6 +283,9 @@ module GeoCerts
       parameters.merge!(self.organization.to_geocerts_hash)   if self.organization
       
       update_attributes(self.class.call_api {GeoCerts.api.create_order(parameters)[:order]})
+      self
+    rescue GeoCerts::AllowableExceptionWithResponse
+      store_exception_errors_and_warnings($!)
       self
     end
     

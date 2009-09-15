@@ -40,19 +40,19 @@ class Test::Unit::TestCase
     raised = false
     begin
       yield
-      flunk "A #{exception} exception failed to be thrown"
     rescue exception => e
       return unless e.respond_to?(:errors)
       error_codes.each do |code|
         assert e.errors.any? { |error| error.code == code }, "No error was returned with Code #{code}\n#{e.errors.inspect}"
       end
+      raised = true
     rescue Exception => e
       flunk "A #{e} exception was thrown, rather than the #{exception} exception expected"
     end
+    flunk "A #{exception} exception failed to be thrown" unless raised
   end
   
   def assert_responds_without_exception(exception, *error_codes, &block)
-    raised = false
     begin
       yield
       assert true # no exceptions were raised

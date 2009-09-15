@@ -110,6 +110,45 @@ Connection: close
 </order>
 |
     
+    OrderWithWarnings = %|HTTP/1.1 200 OK
+Date: Thu, 03 Sep 2009 16:23:03 GMT
+Server: Mongrel 1.1.3
+Status: 200 OK
+Cache-Control: no-cache
+Content-Type: application/xml; charset=utf-8
+Content-Length: 831
+Vary: Accept-Encoding
+Connection: close
+
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+<id type="integer">422815</id>
+<domain>srv02.wavepath.com</domain>
+<geotrust-order-id>93520</geotrust-order-id>
+<status-major>Complete</status-major>
+<status-minor>Order Complete</status-minor>
+<years type="integer">1</years>
+<licenses type="integer">1</licenses>
+<created-at type="datetime">2009-08-12T16:43:02-04:00</created-at>
+<completed-at type="datetime">2009-08-12T16:45:06-04:00</completed-at>
+<trial type="boolean">false</trial>
+<renewal type="boolean">false</renewal>
+<sans></sans>
+<state>COMPLETED</state>
+<total-price type="float">69</total-price>
+<pending-audit type="boolean">false</pending-audit>
+<product>
+  <sku>Q</sku>
+</product>
+<warnings>
+  <warning>
+    <code type="integer">12345</code>
+    <message>Sample Test Warning</message>
+  </warning>
+</warnings
+</order>
+|
+    
     DomainMissing = %|HTTP/1.1 422 Unprocessable Entity
 Date: Thu, 03 Sep 2009 16:58:44 GMT
 Server: Mongrel 1.1.3

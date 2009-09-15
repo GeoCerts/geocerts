@@ -280,10 +280,33 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
         end
       end
       
-      should 'return false on failure' do
+      should 'return a GeoCerts::Order on failure' do
         exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.create(Factory.attributes_for(:order))
-          assert_equal(false, order)
+          assert_kind_of(GeoCerts::Order, order)
+        end
+      end
+      
+      should 'be a new_record? on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.create(Factory.attributes_for(:order))
+          assert order.new_record?
+        end
+      end
+      
+      should 'populate errors on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.create(Factory.attributes_for(:order))
+          assert !order.errors.empty?
+        end
+      end
+      
+      should 'return a GeoCerts::Order with warnings' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::OrderWithWarnings do
+          order = GeoCerts::Order.create(Factory.attributes_for(:order))
+          assert_not_nil(order.warnings)
+          assert !order.warnings.empty?
+          assert order.warnings.all? { |warning| warning.kind_of?(GeoCerts::Warning) }
         end
       end
       
@@ -298,11 +321,88 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
         end
       end
       
-      should 'return false on failure' do
+      should 'raise GeoCerts::ResourceNotCreated on failure' do
         exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
-          assert_responds_with_exception(GeoCerts::UnprocessableEntity) do
+          assert_responds_with_exception(GeoCerts::ResourceNotCreated) do
             GeoCerts::Order.create!(Factory.attributes_for(:order))
           end
+        end
+      end
+      
+    end
+    
+    # Instance methods...
+    
+    context 'save' do
+      
+      should 'return a GeoCerts::Order on success' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          assert_kind_of GeoCerts::Order, order.save
+        end
+      end
+      
+      should 'return false on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          assert_equal(false, order.save)
+        end
+      end
+      
+      should 'be a new_record? on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          order.save
+          assert order.new_record?
+        end
+      end
+      
+      should 'populate errors on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          order.save
+          assert_not_nil(order.errors)
+          assert(!order.errors.empty?)
+        end
+      end
+      
+      should 'return a GeoCerts::Order with warnings' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::OrderWithWarnings do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          order.save
+          assert_not_nil(order.warnings)
+          assert !order.warnings.empty?
+          assert order.warnings.all? { |warning| warning.kind_of?(GeoCerts::Warning) }
+        end
+      end
+      
+    end
+    
+    context 'save!' do
+      
+      should 'return a GeoCerts::Order on success' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          assert_kind_of GeoCerts::Order, order.save!
+        end
+      end
+      
+      should 'raise a GeoCerts::ResourceNotCreated on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          assert_responds_with_exception(GeoCerts::ResourceNotCreated) do
+            order.save!
+          end
+        end
+      end
+      
+      should 'return a GeoCerts::Order with warnings' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::OrderWithWarnings do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          order.save!
+          assert_not_nil(order.warnings)
+          assert !order.warnings.empty?
+          assert order.warnings.all? { |warning| warning.kind_of?(GeoCerts::Warning) }
         end
       end
       
@@ -312,13 +412,14 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       
       should 'return a GeoCerts::Order on success' do
         exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::Order::Validation do
-          assert_kind_of GeoCerts::Order, GeoCerts::Order.validate
+          order = GeoCerts::Order.new(Factory.attributes_for(:order))
+          assert_kind_of GeoCerts::Order, order.validate
         end
       end
       
       should 'contain properly decoded CSR information' do
         exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::Order::Validation do
-          order = GeoCerts::Order.validate
+          order = GeoCerts::Order.new.validate
           assert_equal('www.example.com', order.csr.common_name)
           assert_equal('Atlanta',         order.csr.city)
           assert_equal('GA',              order.csr.state)
@@ -330,7 +431,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       
       should 'contain renewal information' do
         exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::Order::Validation do
-          order = GeoCerts::Order.validate
+          order = GeoCerts::Order.new.validate
           assert_equal(true,              order.renewal_information.indicator)
           assert_equal(1,                 order.renewal_information.months)
           assert_equal('abC12De',         order.renewal_information.serial_number)
@@ -339,11 +440,18 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
         end
       end
       
-      should 'not raise errors for an invalid order' do
-        managed_server_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::GenericFailure do
-          assert_responds_without_exception(GeoCerts::UnprocessableEntity) do
-            GeoCerts::Order.validate
-          end
+      should 'return false on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.new
+          assert_equal(false, order.validate)
+        end
+      end
+      
+      should 'populate the order with errors on failure' do
+        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::GenericFailure do
+          order = GeoCerts::Order.new
+          order.validate
+          assert !order.errors.empty?
         end
       end
       
@@ -382,7 +490,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       
       should 'fail with errors' do
         managed_server_request :post, 'https://api-test.geocerts.com/1/orders.xml;validate', :response => Responses::GenericFailure do
-          assert_responds_with_exception(GeoCerts::UnprocessableEntity, -12345) do
+          assert_responds_with_exception(GeoCerts::ResourceInvalid, -12345) do
             GeoCerts::Order.validate!
           end
         end

@@ -2,9 +2,41 @@ module GeoCerts
   
   class ApiObject # :nodoc:
     
-    def initialize(attributes = {})
+    def initialize(attributes = {}, &block)
       update_attributes(attributes)
       yield(self) if block_given?
+    end
+    
+    def errors
+      @errors ||= []
+    end
+    
+    def warnings
+      @warnings ||= []
+    end
+    
+    def warnings=(input) # :nodoc:
+      @warnings = case input
+        when Hash
+          case input[:warning]
+          when Array
+            input[:warning].collect { |warning| GeoCerts::Warning.new(warning) }
+          end
+        when Array
+          input if input.all? { |item| item.kind_of?(GeoCerts::Warning) }
+        end
+    end
+    
+    def errors=(input) # :nodoc:
+      @errors = case input
+        when Hash
+          case input[:error]
+          when Array
+            input[:error].collect { |error| GeoCerts::Error.new(error) }
+          end
+        when Array
+          input if input.all? { |item| item.kind_of?(GeoCerts::Error) }
+        end
     end
     
     
@@ -59,6 +91,11 @@ module GeoCerts
       options[:end_at]    = options[:end_at].xmlschema    if options.has_key?(:end_at)    && options[:start_at].respond_to?(:xmlschema)
     end
     
+    
+    def store_exception_errors_and_warnings(exception)
+      self.warnings = exception.warnings  if exception.respond_to?(:warnings)
+      self.errors   = exception.errors    if exception.respond_to?(:errors)
+    end
     
     def update_attributes(attributes) # :nodoc:
       attributes.each_pair do |name, value|
