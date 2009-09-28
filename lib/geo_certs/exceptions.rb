@@ -37,7 +37,7 @@ module GeoCerts
     end
     
     def http_code
-      response ? response.code.to_i : nil
+      response && response.respond_to?(:code) ? response.code.to_i : nil
     end
     
     def errors
