@@ -35,6 +35,8 @@ module GeoCerts
                   :renewal_information,
                   :trial
     
+    alias         :approver= :approver_email=
+    
     force_boolean :pending_audit,
                   :renewal,
                   :trial
@@ -272,15 +274,6 @@ module GeoCerts
           input
         when String
           Product.find(input)
-        end
-    end
-    
-    def approver=(input)
-      @approver = case input
-        when Approver
-          input
-        when Hash
-          Approver.new(input)
         end
     end
     
