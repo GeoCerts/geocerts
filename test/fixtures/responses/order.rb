@@ -242,7 +242,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 534
+Content-Length: 1248
 Vary: Accept-Encoding
 Connection: close
 
@@ -256,18 +256,7 @@ Connection: close
 <country>US</country>
 <organization>GeoCerts Inc</organization>
 <org-unit>Internet</org-unit>
-<body>-----BEGIN CERTIFICATE REQUEST-----
-MIIBwjCCASsCAQAwgYExCzAJBgNVBAYTAlVTMRAwDgYDVQQIEwdHZW9yZ2lhMRAw
-DgYDVQQHEwdBdGxhbnRhMRUwEwYDVQQKEwxHZW9DZXJ0cyBJbmMxFTATBgNVBAMT
-DHdhdmVwYXRoLmNvbTEgMB4GCSqGSIb3DQEJARYRdXNlckB3YXZlcGF0aC5jb20w
-gZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMtz8xzYGMFHauj0cPCv80RDUVr+
-eRdWzVj1jn8ugsXUsa2WPgWxqlG9fR3ENAT08M0J/xnmbjvcu1LLVJrs7jSPOQYf
-Kcaw9zz2hPAxShTu9D/miq4pAKAWJ0di/LpUkhn2RN72rLQ6CproOvtHNjtzSkLk
-vAQWLj0UPIecvjpbAgMBAAGgADANBgkqhkiG9w0BAQUFAAOBgQAX+2iHoNRTEjd9
-yaRplEVlZ6fUmesWamFvYqhFwezek6+ECTX9K6q7R1omwzARbFssGHZMrST3J/S5
-dM3OJD6+N+YzXHfyHJzccMSE8g+jREx+Mgst/VYYLAX690iwHXBVbSLCW/hThD08
-buRab8WSICBO6USXtrQLSeDfqwiApQ==
------END CERTIFICATE REQUEST-----</body>
+<body>-----BEGIN CERTIFICATE REQUEST-----\nMIIBwjCCASsCAQAwgYExCzAJBgNVBAYTAlVTMRAwDgYDVQQIEwdHZW9yZ2lhMRAw\nDgYDVQQHEwdBdGxhbnRhMRUwEwYDVQQKEwxHZW9DZXJ0cyBJbmMxFTATBgNVBAMT\nDHdhdmVwYXRoLmNvbTEgMB4GCSqGSIb3DQEJARYRdXNlckB3YXZlcGF0aC5jb20w\ngZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMtz8xzYGMFHauj0cPCv80RDUVr+\neRdWzVj1jn8ugsXUsa2WPgWxqlG9fR3ENAT08M0J/xnmbjvcu1LLVJrs7jSPOQYf\nKcaw9zz2hPAxShTu9D/miq4pAKAWJ0di/LpUkhn2RN72rLQ6CproOvtHNjtzSkLk\nvAQWLj0UPIecvjpbAgMBAAGgADANBgkqhkiG9w0BAQUFAAOBgQAX+2iHoNRTEjd9\nyaRplEVlZ6fUmesWamFvYqhFwezek6+ECTX9K6q7R1omwzARbFssGHZMrST3J/S5\ndM3OJD6+N+YzXHfyHJzccMSE8g+jREx+Mgst/VYYLAX690iwHXBVbSLCW/hThD08\nbuRab8WSICBO6USXtrQLSeDfqwiApQ==\n-----END CERTIFICATE REQUEST-----\n</body>
 </csr>
 <renewal-info>
 <indicator type="boolean">true</indicator>
