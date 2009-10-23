@@ -248,7 +248,13 @@ module GeoCerts
         when Hash
           CSR.new(input)
         when String
-          CSR.new({:body => input}) if input =~ /CERTIFICATE REQUEST-----/
+          if input =~ /CERTIFICATE REQUEST-----/
+            CSR.new({:body => input})
+          else
+            raise ArgumentError.new("Unrecognized CSR given.  Expected a CSR, Hash, or CSR body string, got: \"#{input.inspect}\"")
+          end
+        else
+          raise ArgumentError.new("Unrecognized CSR given.  Expected a CSR, Hash, or CSR body string, got: \"#{input.inspect}\"")
         end
     end
 

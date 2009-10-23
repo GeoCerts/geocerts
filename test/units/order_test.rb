@@ -28,10 +28,10 @@ class OrderTest < Test::Unit::TestCase
       assert_equal(body, order.csr.body)
     end
 
-    should 'ignore random Strings for a CSR' do
-      body  = 'NOT A VALID CSR'
-      order = Factory.build(:order, :csr => body)
-      assert_nil(order.csr)
+    should 'raise an ArgumentError for an unrecognized CSR body string' do
+      assert_raise(ArgumentError) do
+        Factory.build(:order, :csr => 'BADBODY')
+      end
     end
 
     should 'accept a GeoCerts::CSR for a CSR' do
