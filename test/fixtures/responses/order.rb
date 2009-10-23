@@ -1,7 +1,7 @@
 module Responses
-  
+
   module Order
-    
+
     All = %|HTTP/1.1 200 OK
 Date: Thu, 03 Sep 2009 15:56:44 GMT
 Server: Mongrel 1.1.3
@@ -76,7 +76,7 @@ Connection: close
   </order>
 </orders>
 |
-    
+
     Order = %|HTTP/1.1 200 OK
 Date: Thu, 03 Sep 2009 16:23:03 GMT
 Server: Mongrel 1.1.3
@@ -109,7 +109,7 @@ Connection: close
 </product>
 </order>
 |
-    
+
     OrderWithWarnings = %|HTTP/1.1 200 OK
 Date: Thu, 03 Sep 2009 16:23:03 GMT
 Server: Mongrel 1.1.3
@@ -148,7 +148,7 @@ Connection: close
 </warnings
 </order>
 |
-    
+
     DomainMissing = %|HTTP/1.1 422 Unprocessable Entity
 Date: Thu, 03 Sep 2009 16:58:44 GMT
 Server: Mongrel 1.1.3
@@ -197,16 +197,16 @@ Connection: close
   <email>postmaster@geocerts.com</email>
 </emails>
 |
-    
-    BadModifyResponse = %|HTTP/1.1 422 Unprocessable Entity 
-Date: Thu, 03 Sep 2009 17:17:35 GMT 
-Server: Mongrel 1.1.3 
-Status: 422 Unprocessable Entity 
-Cache-Control: no-cache 
-Content-Type: application/xml; charset=utf-8 
-Content-Length: 181 
-Vary: Accept-Encoding 
-Connection: close 
+
+    BadModifyResponse = %|HTTP/1.1 422 Unprocessable Entity
+Date: Thu, 03 Sep 2009 17:17:35 GMT
+Server: Mongrel 1.1.3
+Status: 422 Unprocessable Entity
+Cache-Control: no-cache
+Content-Type: application/xml; charset=utf-8
+Content-Length: 181
+Vary: Accept-Encoding
+Connection: close
 
 <?xml version="1.0" encoding="UTF-8"?>
 <errors>
@@ -216,16 +216,16 @@ Connection: close
   </error>
 </errors>
 |
-    
-    WrongState = %|HTTP/1.1 422 Unprocessable Entity 
-Date: Thu, 03 Sep 2009 17:33:08 GMT 
-Server: Mongrel 1.1.3 
-Status: 422 Unprocessable Entity 
-Cache-Control: no-cache 
-Content-Type: application/xml; charset=utf-8 
-Content-Length: 179 
-Vary: Accept-Encoding 
-Connection: close 
+
+    WrongState = %|HTTP/1.1 422 Unprocessable Entity
+Date: Thu, 03 Sep 2009 17:33:08 GMT
+Server: Mongrel 1.1.3
+Status: 422 Unprocessable Entity
+Cache-Control: no-cache
+Content-Type: application/xml; charset=utf-8
+Content-Length: 179
+Vary: Accept-Encoding
+Connection: close
 
 <?xml version="1.0" encoding="UTF-8"?>
 <errors>
@@ -235,7 +235,7 @@ Connection: close
   </error>
 </errors>
 |
-    
+
     Validation = %|HTTP/1.1 200 OK
 Date: Thu, 03 Sep 2009 16:23:03 GMT
 Server: Mongrel 1.1.3
@@ -256,6 +256,18 @@ Connection: close
 <country>US</country>
 <organization>GeoCerts Inc</organization>
 <org-unit>Internet</org-unit>
+<body>-----BEGIN CERTIFICATE REQUEST-----
+MIIBwjCCASsCAQAwgYExCzAJBgNVBAYTAlVTMRAwDgYDVQQIEwdHZW9yZ2lhMRAw
+DgYDVQQHEwdBdGxhbnRhMRUwEwYDVQQKEwxHZW9DZXJ0cyBJbmMxFTATBgNVBAMT
+DHdhdmVwYXRoLmNvbTEgMB4GCSqGSIb3DQEJARYRdXNlckB3YXZlcGF0aC5jb20w
+gZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMtz8xzYGMFHauj0cPCv80RDUVr+
+eRdWzVj1jn8ugsXUsa2WPgWxqlG9fR3ENAT08M0J/xnmbjvcu1LLVJrs7jSPOQYf
+Kcaw9zz2hPAxShTu9D/miq4pAKAWJ0di/LpUkhn2RN72rLQ6CproOvtHNjtzSkLk
+vAQWLj0UPIecvjpbAgMBAAGgADANBgkqhkiG9w0BAQUFAAOBgQAX+2iHoNRTEjd9
+yaRplEVlZ6fUmesWamFvYqhFwezek6+ECTX9K6q7R1omwzARbFssGHZMrST3J/S5
+dM3OJD6+N+YzXHfyHJzccMSE8g+jREx+Mgst/VYYLAX690iwHXBVbSLCW/hThD08
+buRab8WSICBO6USXtrQLSeDfqwiApQ==
+-----END CERTIFICATE REQUEST-----</body>
 </csr>
 <renewal-info>
 <indicator type="boolean">true</indicator>
@@ -267,5 +279,5 @@ Connection: close
 </order>
 |
   end
-  
+
 end
