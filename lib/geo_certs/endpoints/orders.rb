@@ -112,13 +112,18 @@ ORDER
               parameter 'order[ev_approver][phone]',      :as => :ev_approver_phone
               parameter 'order[ev_approver][email]',      :as => :ev_approver_email
 
+              parameter 'order[admin][first_name]',       :as => :administrator_first_name
+              parameter 'order[admin][last_name]',        :as => :administrator_last_name
+              parameter 'order[admin][phone]',            :as => :administrator_phone
+              parameter 'order[admin][email]',            :as => :administrator_email
+
               parameter 'order[organization][organization_name]', :as => :organization_name
               parameter 'order[organization][address]',           :as => :organization_address
               parameter 'order[organization][city]',              :as => :organization_city
               parameter 'order[organization][state]',             :as => :organization_state
               parameter 'order[organization][postal_code]',       :as => :organization_postal_code
               parameter 'order[organization][phone]',             :as => :organization_phone
-
+              
               parser Parsers::OrderParser do
                 element :order do
                   eval(ELEMENTS)
