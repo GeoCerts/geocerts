@@ -5,7 +5,7 @@ module GeoCerts
     # Used for setting or retrieving the Contact information associated with a 
     # GeoCerts::Order.
     # 
-    class Contact
+    class Contact # :nodoc:all
       
       attr_accessor :email,
                     :first_name,

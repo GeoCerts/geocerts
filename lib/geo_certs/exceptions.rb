@@ -95,35 +95,19 @@ module GeoCerts
     
   end
   
-  class AllowableExceptionWithResponse < ExceptionWithResponse; # :nodoc:
-  end
+  # :stopdoc:
   
+  class AllowableExceptionWithResponse < ExceptionWithResponse; end
+  class Unauthorized        < ExceptionWithResponse; end
+  class BadRequest          < ExceptionWithResponse; end
+  class UnprocessableEntity < AllowableExceptionWithResponse; end
+  class ResourceNotFound    < AllowableExceptionWithResponse; end
+  class ResourceNotCreated  < Exception; end
+  class ResourceInvalid     < Exception; end
+  class RequestFailed       < AllowableExceptionWithResponse; end
+  class RequestTimeout      < Exception; end
+  class ConnectionError     < Exception; end
   
-  class Unauthorized        < ExceptionWithResponse # :nodoc:
-  end
-  
-  class BadRequest          < ExceptionWithResponse # :nodoc:
-  end
-  
-  class UnprocessableEntity < AllowableExceptionWithResponse # :nodoc:
-  end
-  
-  class ResourceNotFound    < AllowableExceptionWithResponse # :nodoc:
-  end
-  
-  class ResourceNotCreated  < Exception # :nodoc:
-  end
-  
-  class ResourceInvalid     < Exception # :nodoc:
-  end
-  
-  class RequestFailed       < AllowableExceptionWithResponse # :nodoc:
-  end
-  
-  class RequestTimeout      < Exception # :nodoc:
-  end
-  
-  class ConnectionError     < Exception # :nodoc:
-  end
+  # :startdoc:
   
 end
