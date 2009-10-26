@@ -7,7 +7,7 @@ module GeoCerts
   # 
   class Product < ApiObject
     
-    attr_accessor :name, :sku, :max_years, :code
+    attr_accessor :name, :sku, :max_years
     
     
     ##
@@ -47,7 +47,6 @@ module GeoCerts
       self.name       = attributes[:name]
       self.sku        = attributes[:sku]
       self.max_years  = attributes[:max_years]
-      self.code       = attributes[:code]
     end
     
     ##
@@ -55,7 +54,7 @@ module GeoCerts
     # 
     def user_agreement
       GeoCerts::Agreement.new(self.class.call_api {
-        GeoCerts.api.agreement(:product_id => self.code)
+        GeoCerts.api.agreement(:product_id => self.sku)
       })
     end
     

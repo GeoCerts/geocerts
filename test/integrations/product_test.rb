@@ -25,7 +25,6 @@ class GeoCerts::ProductTest < Test::Unit::TestCase
           product = GeoCerts::Product.all.first
           assert_equal('QuickSSL',  product.name)
           assert_equal('Q',         product.sku)
-          assert_equal('QUICKSSL',  product.code)
           assert_equal(6,           product.max_years)
         end
       end
