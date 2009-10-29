@@ -21,15 +21,15 @@ module GeoCerts
       
       def to_geocerts_hash
         {
-          :organization_address     => self.address,
-          :organization_address_2   => self.address_2,
-          :organization_address_3   => self.address_3,
-          :organization_city        => self.city,
-          :organization_country     => self.country,
-          :organization_name        => self.name,
-          :organization_phone       => self.phone,
-          :organization_postal_code => self.postal_code,
-          :organization_state       => self.state
+          :organization_address     => GeoCerts.escape(self.address),
+          :organization_address_2   => GeoCerts.escape(self.address_2),
+          :organization_address_3   => GeoCerts.escape(self.address_3),
+          :organization_city        => GeoCerts.escape(self.city),
+          :organization_country     => GeoCerts.escape(self.country),
+          :organization_name        => GeoCerts.escape(self.name),
+          :organization_phone       => GeoCerts.escape(self.phone),
+          :organization_postal_code => GeoCerts.escape(self.postal_code),
+          :organization_state       => GeoCerts.escape(self.state)
         }
       end
       

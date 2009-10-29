@@ -62,6 +62,8 @@ module GeoCerts
       raise GeoCerts::RequestTimeout.new($!.message)
     rescue *GeoCerts::HTTP_ERRORS
       raise GeoCerts::ConnectionError.new($!.message)
+    # rescue
+    #   raise GeoCerts::Exception.from($!)
     end
     
     def self.force_boolean(*attributes) # :nodoc:

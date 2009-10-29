@@ -8,7 +8,7 @@ class Hash # :nodoc:
             LibXML::XML.default_pedantic_parser = strict
             result = LibXML::XML::Parser.string(xml).parse 
             return { result.root.name.to_s => xml_node_to_hash(result.root)} 
-          rescue Exception => e
+          rescue
             raise $!
             # raise your custom exception here
           end

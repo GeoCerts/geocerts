@@ -59,7 +59,7 @@ module GeoCerts
     end
     
     def to_geocerts_hash
-      { :product_sku => self.sku }
+      { :product_sku => GeoCerts.escape(self.sku) }
     end
     
   end

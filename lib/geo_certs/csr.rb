@@ -23,7 +23,7 @@ module GeoCerts
     end
     
     def to_geocerts_hash
-      { :csr_body => CGI.escape(self.body) }
+      { :csr_body => GeoCerts.escape(self.body) }
     end
     
   end

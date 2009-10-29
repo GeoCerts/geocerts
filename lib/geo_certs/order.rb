@@ -188,7 +188,7 @@ module GeoCerts
       parameters = {}
       parameters[:years]        = self.years
       parameters[:licenses]     = self.licenses
-      parameters[:sans]         = CGI.escape(self.sans) if self.sans
+      parameters[:sans]         = GeoCerts.escape(self.sans) if self.sans
       parameters.merge!(self.csr.to_geocerts_hash)      if self.csr
       parameters.merge!(self.product.to_geocerts_hash)  if self.product
 
@@ -258,6 +258,10 @@ module GeoCerts
         end
     end
 
+    ##
+    # Sets the renewal information for the order.  This method accepts either
+    # a GeoCerts::RenewalInformation instance or a hash of attributes.
+    # 
     def renewal_information=(input)
       case input
       when RenewalInformation
@@ -283,6 +287,11 @@ module GeoCerts
         end
     end
 
+    ##
+    # Sets the extended validation approver for the order.  This method 
+    # accepts either a GeoCerts::ExtendedValidationApprover instance or a 
+    # hash of attributes.
+    # 
     def ev_approver=(input)
       case input
       when ExtendedValidationApprover
@@ -292,6 +301,10 @@ module GeoCerts
       end
     end
 
+    ##
+    # Sets the administrator for the order.  This method accepts either a
+    # GeoCerts::Administrator instance or a hash of administrator attributes.
+    # 
     def administrator=(input)
       case input
       when Administrator
@@ -300,7 +313,11 @@ module GeoCerts
         @administrator = Administrator.new(input)
       end
     end
-
+    
+    ##
+    # Sets the organization for the order.  This method accepts either a
+    # GeoCerts::Organization instance or a hash of organization attributes.
+    # 
     def organization=(input)
       case input
       when Organization
@@ -330,10 +347,10 @@ module GeoCerts
 
     def create
       parameters = {}
-      parameters[:approver_email]   = self.approver_email
-      parameters[:years]            = self.years
-      parameters[:licenses]         = self.licenses
-      parameters[:sans]             = CGI.escape(self.sans)   if self.sans
+      parameters[:approver_email]   = GeoCerts.escape(self.approver_email)
+      parameters[:years]            = GeoCerts.escape(self.years)
+      parameters[:licenses]         = GeoCerts.escape(self.licenses)
+      parameters[:sans]             = GeoCerts.escape(self.sans)
       parameters.merge!(self.csr.to_geocerts_hash)            if self.csr
       parameters.merge!(self.product.to_geocerts_hash)        if self.product
       parameters.merge!(self.ev_approver.to_geocerts_hash)    if self.ev_approver

@@ -19,13 +19,15 @@ end
 class Test::Unit::TestCase
   
   def managed_server_request(method, url, options = {}, &block)
-    uri           = URI.parse(url)
-    uri.user      = GeoCerts.login
-    uri.password  = GeoCerts.api_token
-    
-    unless use_remote_server?
+    case url
+    when String
+      uri           = URI.parse(url)
+      uri.user      = GeoCerts.login
+      uri.password  = GeoCerts.api_token
       FakeWeb.register_uri(method, uri.to_s, options)
-    end
+    when Regexp
+      FakeWeb.register_uri(method, url, options)
+    end unless use_remote_server?
     
     yield
   ensure

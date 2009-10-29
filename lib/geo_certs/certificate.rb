@@ -78,7 +78,7 @@ module GeoCerts
       update_attributes(self.class.call_api {
         GeoCerts.api.reissue_certificate({
           :order_id => self.order_id,
-          :csr_body => CGI.escape(csr || '')
+          :csr_body => GeoCerts.escape(csr || '')
         })
       })
     end

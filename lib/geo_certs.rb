@@ -33,4 +33,8 @@ module GeoCerts
     @@api = API.new({:version => 1}, {:credentials => [login, api_token]})
   end
   
+  def self.escape(value) # :nodoc:
+    value ? CGI.escape(value.to_s) : nil
+  end
+  
 end

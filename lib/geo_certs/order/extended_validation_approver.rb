@@ -9,11 +9,11 @@ module GeoCerts
       
       def to_geocerts_hash
         {
-          :ev_approver_first_name   => self.first_name,
-          :ev_approver_last_name    => self.last_name,
-          :ev_approver_title        => self.title,
-          :ev_approver_phone        => self.phone,
-          :ev_approver_email        => self.email
+          :ev_approver_first_name   => GeoCerts.escape(self.first_name),
+          :ev_approver_last_name    => GeoCerts.escape(self.last_name),
+          :ev_approver_title        => GeoCerts.escape(self.title),
+          :ev_approver_phone        => GeoCerts.escape(self.phone),
+          :ev_approver_email        => GeoCerts.escape(self.email)
         }
       end
       
