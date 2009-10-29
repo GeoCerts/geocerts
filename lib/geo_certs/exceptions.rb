@@ -16,7 +16,18 @@ module GeoCerts
   # The lowest-level GeoCerts exception.  All exceptions raised from within this library 
   # should be inherited from this exception.
   # 
-  class Exception < RuntimeError; end
+  class Exception < RuntimeError
+    
+    ##
+    # Wraps the given exception, keeping the message and backtrace.
+    # 
+    def self.from(exception)
+      new("%s: %s" % [exception.class.name, exception.message]).tap do |me|
+        me.set_backtrace(exception.backtrace)
+      end
+    end
+    
+  end
   
   ##
   # An exception that is raised which contains an HTTP response, and additionally, errors
