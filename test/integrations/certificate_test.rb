@@ -172,7 +172,7 @@ class GeoCerts::CertificateTest < Test::Unit::TestCase
       
       should 'return a GeoCerts::Certificate when successful' do
         managed_server_request :get, "https://api-test.geocerts.com/1/orders/#{@order_id}/certificate.xml", :response => Responses::Certificate::Certificate do
-          managed_server_request :post, "https://api-test.geocerts.com/1/orders/422815/certificate.xml;reissue?order[csr][body]=testbody", :response => Responses::Certificate::Certificate do
+          managed_server_request :post, "https://api-test.geocerts.com/1/orders/422815/certificate/reissue.xml?order[csr][body]=testbody", :response => Responses::Certificate::Certificate do
             assert_kind_of(GeoCerts::Certificate, GeoCerts::Certificate.find(@order_id).reissue!(GeoCerts::CSR.new(:body => 'testbody')))
           end
         end
@@ -180,7 +180,7 @@ class GeoCerts::CertificateTest < Test::Unit::TestCase
       
       should 'raise an error with no CSR body provided' do
         managed_server_request :get, "https://api-test.geocerts.com/1/orders/#{@order_id}/certificate.xml", :response => Responses::Certificate::Certificate do
-          managed_server_request :post, "https://api-test.geocerts.com/1/orders/#{@order_id}/certificate.xml;reissue?order[csr][body]=", :response => Responses::Certificate::MissingCSRBody do
+          managed_server_request :post, "https://api-test.geocerts.com/1/orders/#{@order_id}/certificate/reissue.xml?order[csr][body]=", :response => Responses::Certificate::MissingCSRBody do
             assert_responds_with_exception(GeoCerts::UnprocessableEntity, -90010) do
               GeoCerts::Certificate.find(@order_id).reissue!(GeoCerts::CSR.new(:body => nil))
             end

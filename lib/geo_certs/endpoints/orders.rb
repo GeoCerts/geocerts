@@ -62,7 +62,7 @@ ORDER
               end
             end
 
-            action :modify_order, :url => '/orders/:id.xml;modify', :method => :put do
+            action :modify_order, :url => '/orders/:id/modify.xml', :method => :put do
               parameter 'order[state]', :as => :state, :required => true
               parser Parsers::OrderParser do
                 element :order do
@@ -71,7 +71,7 @@ ORDER
               end
             end
 
-            action :domain_approvers, :url => '/orders.xml;approvers' do
+            action :domain_approvers, :url => '/orders/approvers.xml' do
               parameter :domain, :required => true
               parser :emails do
                 element :emails do
@@ -80,7 +80,7 @@ ORDER
               end
             end
 
-            action :resend_approval_email, :url => '/orders/:id.xml;resend', :method => :post do
+            action :resend_approval_email, :url => '/orders/:id/resend.xml', :method => :post do
               parser Parsers::OrderParser do
                 element :order do
                   eval(ELEMENTS)
@@ -88,7 +88,7 @@ ORDER
               end
             end
 
-            action :change_order_approval_email, :url => '/orders/:id.xml;email', :method => :put do
+            action :change_order_approval_email, :url => '/orders/:id/email.xml', :method => :put do
               parameter 'order[approver_email]', :as => :approver_email, :required => true
               parser Parsers::OrderParser do
                 element :order do
@@ -131,7 +131,7 @@ ORDER
               end
             end
 
-            action :validate_order, :url => '/orders.xml;validate', :method => :post do
+            action :validate_order, :url => '/orders/validate.xml', :method => :post do
               parameter 'order[product][sku]',  :as => :product_sku
               parameter 'order[csr][body]',     :as => :csr_body
               parameter 'order[years]',         :as => :years

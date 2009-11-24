@@ -54,7 +54,7 @@ CERTIFICATE
               end
             end
             
-            action :reissue_certificate, :url => '/orders/:order_id/certificate.xml;reissue', :method => :post do
+            action :reissue_certificate, :url => '/orders/:order_id/certificate/reissue.xml', :method => :post do
               parameter 'order[csr][body]',     :as => :csr_body
               parser Parsers::OrderParser do
                 element :certificate,     :xpath => '/certificate' do
