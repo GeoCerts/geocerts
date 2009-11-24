@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{geocerts}
-  s.version = "0.0.8"
+  s.version = "0.0.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["GeoCerts, Inc."]
-  s.date = %q{2009-10-29}
+  s.date = %q{2009-11-24}
   s.description = %q{A Ruby library for interfacing with the GeoCerts REST API}
   s.email = %q{support@geocerts.com}
   s.extra_rdoc_files = [
