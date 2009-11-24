@@ -18,7 +18,8 @@ module GeoCerts
   class API < Relax::Service # :nodoc:
     
     # ENDPOINT = 'http://localhost:3000/:version'
-    ENDPOINT = "https://api-test.geocerts.com/:version"
+    # ENDPOINT = "https://api-test.geocerts.com/:version"
+    ENDPOINT = "https://geocerts.envylabs.com/:version"
     
     include Endpoints::Orders
     include Endpoints::Certificates
