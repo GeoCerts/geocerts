@@ -2,7 +2,7 @@ require 'yaml'
 
 begin
   credentials         = YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/../test_credentials.yml'))
-  GeoCerts.login      = credentials['login']
+  GeoCerts.partner_id = credentials['partner_id']
   GeoCerts.api_token  = credentials['api_token']
 rescue Errno::ENOENT, LoadError
   puts '===='

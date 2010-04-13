@@ -22,7 +22,7 @@ class Test::Unit::TestCase
     case path
     when String
       uri           = URI.parse(GeoCerts::API::ENDPOINT.gsub(':version', '1') + path)
-      uri.user      = GeoCerts.login
+      uri.user      = GeoCerts.partner_id
       uri.password  = GeoCerts.api_token
       FakeWeb.register_uri(method, uri.to_s, options)
     when Regexp

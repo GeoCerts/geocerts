@@ -3,9 +3,9 @@ require 'cgi'
 require 'geo_certs/api'
 
 ##
-# To properly configure the GeoCerts library, you must provide your login and api token:
+# To properly configure the GeoCerts library, you must provide your partner ID and api token:
 # 
-#   GeoCerts.login      = 'example'
+#   GeoCerts.partner_id = 'ex4Mpl3'
 #   GeoCerts.api_token  = 'abc123DEF456gHi...'
 # 
 # After that, most interaction is performed through other objects within the library, such
@@ -21,16 +21,16 @@ module GeoCerts
     @@api_token = token
   end
   
-  def self.login
-    @@login ||= login
+  def self.partner_id
+    @@partner_id ||= partner_id
   end
   
-  def self.login=(login)
-    @@login = login
+  def self.partner_id=(partner_id)
+    @@partner_id = partner_id
   end
   
   def self.api # :nodoc:
-    @@api = API.new({:version => 1}, {:credentials => [login, api_token]})
+    @@api = API.new({:version => 1}, {:credentials => [partner_id, api_token]})
   end
   
   def self.escape(value) # :nodoc:
