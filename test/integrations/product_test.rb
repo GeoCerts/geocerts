@@ -7,7 +7,7 @@ class GeoCerts::ProductTest < Test::Unit::TestCase
     context 'all' do
       
       should 'return a collection of GeoCerts::Products' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        managed_server_request :get, '/products.xml', :response => Responses::Product::All do
           products = GeoCerts::Product.all
           assert_kind_of(GeoCerts::Collection, products)
           assert products.all? { |product| product.kind_of?(GeoCerts::Product) }
@@ -15,13 +15,13 @@ class GeoCerts::ProductTest < Test::Unit::TestCase
       end
       
       should 'return 11 products' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        exclusively_mocked_request :get, '/products.xml', :response => Responses::Product::All do
           assert_equal(11, GeoCerts::Product.all.size)
         end
       end
       
       should 'properly populate the products' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        exclusively_mocked_request :get, '/products.xml', :response => Responses::Product::All do
           product = GeoCerts::Product.all.first
           assert_equal('QuickSSL',  product.name)
           assert_equal('Q',         product.sku)
@@ -34,13 +34,13 @@ class GeoCerts::ProductTest < Test::Unit::TestCase
     context 'find' do
       
       should 'return a GeoCerts::Product by SKU' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        managed_server_request :get, '/products.xml', :response => Responses::Product::All do
           assert_equal('Q', GeoCerts::Product.find('Q').sku)
         end
       end
       
       should 'raise a GeoCerts::ResourceNotFound exception' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        managed_server_request :get, '/products.xml', :response => Responses::Product::All do
           assert_responds_with_exception(GeoCerts::ResourceNotFound) do
             GeoCerts::Product.find('BADSKU')
           end
@@ -52,13 +52,13 @@ class GeoCerts::ProductTest < Test::Unit::TestCase
     context 'find_by_sku' do
       
       should 'return a GeoCerts::Product by SKU' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        managed_server_request :get, '/products.xml', :response => Responses::Product::All do
           assert_equal('Q', GeoCerts::Product.find_by_sku('Q').sku)
         end
       end
       
       should 'raise a GeoCerts::ResourceNotFound exception' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/products.xml', :response => Responses::Product::All do
+        managed_server_request :get, '/products.xml', :response => Responses::Product::All do
           assert_responds_without_exception(GeoCerts::ResourceNotFound) do
             assert_nil GeoCerts::Product.find_by_sku('BADSKU')
           end

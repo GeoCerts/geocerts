@@ -7,19 +7,19 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'all' do
       
       should 'return a collection of GeoCerts::Orders' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        managed_server_request :get, '/orders.xml', :response => Responses::Order::All do
           assert GeoCerts::Order.all.all? { |item| item.kind_of?(GeoCerts::Order) }
         end
       end
       
       should 'return three orders' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           assert_equal(3, GeoCerts::Order.all.size)
         end
       end
       
       should 'properly populate the order data' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
           assert_equal(422815,                order.id)
           assert_equal('srv02.wavepath.com',  order.domain)
@@ -40,19 +40,19 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'set the end at time' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           assert_equal DateTime.parse('2009-09-03T11:56:44-04:00'), GeoCerts::Order.all.end_at
         end
       end
       
       should 'set the start at time' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           assert_equal DateTime.parse('2009-08-04T11:56:44-04:00'), GeoCerts::Order.all.start_at
         end
       end
       
       should 'modify the query range' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders.xml?end_at=2009-01-02T00:00:00+00:00&start_at=2009-01-01T00:00:00+00:00', :response => Responses::Order::All do
+        managed_server_request :get, '/orders.xml?end_at=2009-01-02T00:00:00+00:00&start_at=2009-01-01T00:00:00+00:00', :response => Responses::Order::All do
           GeoCerts::Order.all(:start_at => DateTime.parse('2009-01-01T00:00:00Z'), :end_at => DateTime.parse('2009-01-02T00:00:00Z'))
         end
       end
@@ -62,13 +62,13 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'find' do
       
       setup do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        managed_server_request :get, '/orders.xml', :response => Responses::Order::All do
           @order_id = GeoCerts::Order.all.first.id
         end
       end
       
       should 'return a GeoCerts::Order' do
-        managed_server_request :get, "https://api-test.geocerts.com/1/orders/#{@order_id}.xml", :response => Responses::Order::Order do
+        managed_server_request :get, "/orders/#{@order_id}.xml", :response => Responses::Order::Order do
           order = GeoCerts::Order.find(@order_id)
           assert_kind_of(GeoCerts::Order, order)
           assert_equal(@order_id, order.id)
@@ -76,7 +76,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'properly populate the order data' do
-        exclusively_mocked_request :get, "https://api-test.geocerts.com/1/orders/422815.xml", :response => Responses::Order::Order do
+        exclusively_mocked_request :get, "/orders/422815.xml", :response => Responses::Order::Order do
           order = GeoCerts::Order.find(422815)
           assert_equal(422815,                order.id)
           assert_equal('srv02.wavepath.com',  order.domain)
@@ -97,7 +97,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'raise a ResourceNotFound error' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders/999999999.xml', :response => Responses::InvalidOrderId do
+        managed_server_request :get, '/orders/999999999.xml', :response => Responses::InvalidOrderId do
           assert_responds_with_exception(GeoCerts::ResourceNotFound, -90004) do
             GeoCerts::Order.find(999999999)
           end
@@ -109,13 +109,13 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'find_by_id' do
       
       setup do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        managed_server_request :get, '/orders.xml', :response => Responses::Order::All do
           @order_id = GeoCerts::Order.all.first.id
         end
       end
       
       should 'return a GeoCerts::Order' do
-        managed_server_request :get, "https://api-test.geocerts.com/1/orders/#{@order_id}.xml", :response => Responses::Order::Order do
+        managed_server_request :get, "/orders/#{@order_id}.xml", :response => Responses::Order::Order do
           order = GeoCerts::Order.find_by_id(@order_id)
           assert_kind_of(GeoCerts::Order, order)
           assert_equal(@order_id, order.id)
@@ -123,7 +123,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'properly populate the order data' do
-        exclusively_mocked_request :get, "https://api-test.geocerts.com/1/orders/422815.xml", :response => Responses::Order::Order do
+        exclusively_mocked_request :get, "/orders/422815.xml", :response => Responses::Order::Order do
           order = GeoCerts::Order.find_by_id(422815)
           assert_equal(422815,                order.id)
           assert_equal('srv02.wavepath.com',  order.domain)
@@ -144,7 +144,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'raise a ResourceNotFound error' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders/999999999.xml', :response => Responses::InvalidOrderId do
+        managed_server_request :get, '/orders/999999999.xml', :response => Responses::InvalidOrderId do
           assert_responds_without_exception(GeoCerts::ResourceNotFound) do
             assert_nil GeoCerts::Order.find_by_id(999999999)
           end
@@ -156,7 +156,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'approvers' do
       
       should 'return a collection of GeoCerts::Emails' do
-        managed_server_request :get, "https://api-test.geocerts.com/1/orders/approvers.xml?domain=geocerts.com", :response => Responses::Order::Approvers do
+        managed_server_request :get, "/orders/approvers.xml?domain=geocerts.com", :response => Responses::Order::Approvers do
           approvers = GeoCerts::Order.approvers('geocerts.com')
           assert_kind_of(GeoCerts::Collection, approvers)
           assert(approvers.all? { |item| item.kind_of?(GeoCerts::Email) }, approvers.collect { |item| item.class.name }.join(", "))
@@ -164,7 +164,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'contain expected addresses' do
-        managed_server_request :get, "https://api-test.geocerts.com/1/orders/approvers.xml?domain=geocerts.com", :response => Responses::Order::Approvers do
+        managed_server_request :get, "/orders/approvers.xml?domain=geocerts.com", :response => Responses::Order::Approvers do
           approvers = GeoCerts::Order.approvers('geocerts.com')
           %W( blank@geocerts.com
               admin@geocerts.com
@@ -191,9 +191,9 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'modify!' do
       
       should 'raise an error with an invalid state given' do
-        managed_server_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        managed_server_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          managed_server_request :put, "https://api-test.geocerts.com/1/orders/#{order.id}/modify.xml?order[state]=BAD", :response => Responses::Order::BadModifyResponse do
+          managed_server_request :put, "/orders/#{order.id}/modify.xml?order[state]=BAD", :response => Responses::Order::BadModifyResponse do
             assert_responds_with_exception(GeoCerts::UnprocessableEntity, -90003) do
               order.modify!('BAD')
             end
@@ -202,9 +202,9 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'raise an error when modifying an order which cannot be modified' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          exclusively_mocked_request :put, "https://api-test.geocerts.com/1/orders/#{order.id}/modify.xml?order[state]=CANCEL", :response => Responses::Order::WrongState do
+          exclusively_mocked_request :put, "/orders/#{order.id}/modify.xml?order[state]=CANCEL", :response => Responses::Order::WrongState do
             assert_responds_with_exception(GeoCerts::UnprocessableEntity, -90002) do
               order.modify!('CANCEL')
             end
@@ -213,9 +213,9 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'return a GeoCerts::Order when successful' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          exclusively_mocked_request :put, "https://api-test.geocerts.com/1/orders/#{order.id}/modify.xml?order[state]=CANCEL", :response => Responses::Order::Order do
+          exclusively_mocked_request :put, "/orders/#{order.id}/modify.xml?order[state]=CANCEL", :response => Responses::Order::Order do
             order.modify!('CANCEL')
           end
         end
@@ -226,18 +226,18 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'resend_approval_email!' do
       
       should 'respond with a GeoCerts::Order' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          exclusively_mocked_request :post, "https://api-test.geocerts.com/1/orders/#{order.id}/resend.xml", :response => Responses::Order::Order do
+          exclusively_mocked_request :post, "/orders/#{order.id}/resend.xml", :response => Responses::Order::Order do
             order.resend_approval_email!
           end
         end
       end
       
       should 'fail with errors' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          exclusively_mocked_request :post, "https://api-test.geocerts.com/1/orders/#{order.id}/resend.xml", :response => Responses::GenericFailure do
+          exclusively_mocked_request :post, "/orders/#{order.id}/resend.xml", :response => Responses::GenericFailure do
             assert_responds_with_exception(GeoCerts::UnprocessableEntity, -12345) do
               order.resend_approval_email!
             end
@@ -250,18 +250,18 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'change_approver_email!' do
       
       should 'respond with a GeoCerts::Order' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          exclusively_mocked_request :put, "https://api-test.geocerts.com/1/orders/#{order.id}/email.xml?order[approver_email]=admin@example.com", :response => Responses::Order::Order do
+          exclusively_mocked_request :put, "/orders/#{order.id}/email.xml?order[approver_email]=admin@example.com", :response => Responses::Order::Order do
             order.change_approver_email!('admin@example.com')
           end
         end
       end
       
       should 'fail with errors' do
-        exclusively_mocked_request :get, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::All do
+        exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          exclusively_mocked_request :put, "https://api-test.geocerts.com/1/orders/#{order.id}/email.xml?order[approver_email]=admin@example.com", :response => Responses::GenericFailure do
+          exclusively_mocked_request :put, "/orders/#{order.id}/email.xml?order[approver_email]=admin@example.com", :response => Responses::GenericFailure do
             assert_responds_with_exception(GeoCerts::UnprocessableEntity, -12345) do
               order.change_approver_email!('admin@example.com')
             end
@@ -274,35 +274,35 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'create' do
       
       should 'return a GeoCerts::Order on success' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::Order do
           order = GeoCerts::Order.create(Factory.attributes_for(:order))
           assert_kind_of GeoCerts::Order, order
         end
       end
       
       should 'return a GeoCerts::Order on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.create(Factory.attributes_for(:order))
           assert_kind_of(GeoCerts::Order, order)
         end
       end
       
       should 'be a new_record? on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.create(Factory.attributes_for(:order))
           assert order.new_record?
         end
       end
       
       should 'populate errors on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.create(Factory.attributes_for(:order))
           assert !order.errors.empty?
         end
       end
       
       should 'return a GeoCerts::Order with warnings' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::OrderWithWarnings do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::OrderWithWarnings do
           order = GeoCerts::Order.create(Factory.attributes_for(:order))
           assert_not_nil(order.warnings)
           assert !order.warnings.empty?
@@ -315,14 +315,14 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'create!' do
       
       should 'return a GeoCerts::Order on success' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::Order do
           order = GeoCerts::Order.create!(Factory.attributes_for(:order))
           assert_kind_of GeoCerts::Order, order
         end
       end
       
       should 'raise GeoCerts::ResourceNotCreated on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           assert_responds_with_exception(GeoCerts::ResourceNotCreated) do
             GeoCerts::Order.create!(Factory.attributes_for(:order))
           end
@@ -336,21 +336,21 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'save' do
       
       should 'return a GeoCerts::Order on success' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::Order do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           assert_kind_of GeoCerts::Order, order.save
         end
       end
       
       should 'return false on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           assert_equal(false, order.save)
         end
       end
       
       should 'be a new_record? on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           order.save
           assert order.new_record?
@@ -358,7 +358,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'populate errors on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           order.save
           assert_not_nil(order.errors)
@@ -367,7 +367,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'return a GeoCerts::Order with warnings' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::OrderWithWarnings do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::OrderWithWarnings do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           order.save
           assert_not_nil(order.warnings)
@@ -388,14 +388,14 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'save!' do
       
       should 'return a GeoCerts::Order on success' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::Order do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::Order do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           assert_kind_of GeoCerts::Order, order.save!
         end
       end
       
       should 'raise a GeoCerts::ResourceNotCreated on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           assert_responds_with_exception(GeoCerts::ResourceNotCreated) do
             order.save!
@@ -404,7 +404,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'return a GeoCerts::Order with warnings' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders.xml', :response => Responses::Order::OrderWithWarnings do
+        exclusively_mocked_request :post, '/orders.xml', :response => Responses::Order::OrderWithWarnings do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           order.save!
           assert_not_nil(order.warnings)
@@ -418,14 +418,14 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'validate' do
       
       should 'return a GeoCerts::Order on success' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::Order::Validation do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::Order::Validation do
           order = GeoCerts::Order.new(Factory.attributes_for(:order))
           assert_kind_of GeoCerts::Order, order.validate
         end
       end
       
       should 'contain properly decoded CSR information' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::Order::Validation do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::Order::Validation do
           order = GeoCerts::Order.new.validate
           assert_equal('www.example.com', order.csr.common_name)
           assert_equal('Atlanta',         order.csr.city)
@@ -437,7 +437,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'contain renewal information' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::Order::Validation do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::Order::Validation do
           order = GeoCerts::Order.new.validate
           assert_equal(true,              order.renewal_information.indicator)
           assert_equal(1,                 order.renewal_information.months)
@@ -448,14 +448,14 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'return false on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.new
           assert_equal(false, order.validate)
         end
       end
       
       should 'populate the order with errors on failure' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::GenericFailure do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::GenericFailure do
           order = GeoCerts::Order.new
           order.validate
           assert !order.errors.empty?
@@ -467,13 +467,13 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
     context 'validate!' do
       
       should 'return a GeoCerts::Order on success' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::Order::Validation do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::Order::Validation do
           assert_kind_of GeoCerts::Order, GeoCerts::Order.validate!
         end
       end
       
       should 'contain properly decoded CSR information' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::Order::Validation do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::Order::Validation do
           order = GeoCerts::Order.validate!
           assert_equal('www.example.com', order.csr.common_name)
           assert_equal('Atlanta',         order.csr.city)
@@ -485,7 +485,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'contain renewal information' do
-        exclusively_mocked_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::Order::Validation do
+        exclusively_mocked_request :post, '/orders/validate.xml', :response => Responses::Order::Validation do
           order = GeoCerts::Order.validate!
           assert_equal(true,              order.renewal_information.indicator)
           assert_equal(1,                 order.renewal_information.months)
@@ -496,7 +496,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'raise ResourceInvalid on failure' do
-        managed_server_request :post, 'https://api-test.geocerts.com/1/orders/validate.xml', :response => Responses::GenericFailure do
+        managed_server_request :post, '/orders/validate.xml', :response => Responses::GenericFailure do
           assert_responds_with_exception(GeoCerts::ResourceInvalid, -12345) do
             GeoCerts::Order.validate!
           end
