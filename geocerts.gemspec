@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{geocerts}
-  s.version = "0.0.11"
+  s.version = "0.0.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["GeoCerts, Inc."]
@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
      "lib/geo_certs/order/renewal_information.rb",
      "lib/geo_certs/parsers/order_parser.rb",
      "lib/geo_certs/product.rb",
+     "lib/geocerts.rb",
      "test/config/initializers/_remote_tests.rb",
      "test/config/initializers/fakeweb.rb",
      "test/config/initializers/geocerts.rb",
