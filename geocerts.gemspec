@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["GeoCerts, Inc."]
   s.date = %q{2010-04-14}
   s.description = %q{A Ruby library for interfacing with the GeoCerts REST API}
-  s.email = %q{support@geocerts.com}
+  s.email = %q{sslsupport@geocerts.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -122,21 +122,21 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<relax>, [">= 0.1.2"])
-      s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 2.10.2"])
-      s.add_development_dependency(%q<thoughtbot-factory_girl>, [">= 1.2.2"])
+      s.add_development_dependency(%q<shoulda>, [">= 2.10.2"])
+      s.add_development_dependency(%q<factory_girl>, [">= 1.2.2"])
       s.add_development_dependency(%q<mocha>, [">= 0.9.5"])
       s.add_development_dependency(%q<fakeweb>, [">= 1.2.2"])
     else
       s.add_dependency(%q<relax>, [">= 0.1.2"])
-      s.add_dependency(%q<thoughtbot-shoulda>, [">= 2.10.2"])
-      s.add_dependency(%q<thoughtbot-factory_girl>, [">= 1.2.2"])
+      s.add_dependency(%q<shoulda>, [">= 2.10.2"])
+      s.add_dependency(%q<factory_girl>, [">= 1.2.2"])
       s.add_dependency(%q<mocha>, [">= 0.9.5"])
       s.add_dependency(%q<fakeweb>, [">= 1.2.2"])
     end
   else
     s.add_dependency(%q<relax>, [">= 0.1.2"])
-    s.add_dependency(%q<thoughtbot-shoulda>, [">= 2.10.2"])
-    s.add_dependency(%q<thoughtbot-factory_girl>, [">= 1.2.2"])
+    s.add_dependency(%q<shoulda>, [">= 2.10.2"])
+    s.add_dependency(%q<factory_girl>, [">= 1.2.2"])
     s.add_dependency(%q<mocha>, [">= 0.9.5"])
     s.add_dependency(%q<fakeweb>, [">= 1.2.2"])
   end
