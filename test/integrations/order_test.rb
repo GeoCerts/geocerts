@@ -377,8 +377,8 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       end
       
       should 'not raise errors with a full organization given' do
-        exclusively_mocked_request :post, %r{https://.*api-test.geocerts.com/1/orders.xml.*}i, :response => Responses::Order::Order do
-          order = GeoCerts::Order.new({:organization => {:address => '123 SSL Ave.', :address_2 => 'Suite D', :address_3 => 'tesat', :city => 'Atlanta', :country => 'US', :name => 'Microsoft Inc', :phone => '800-555-1212', :postal_code => '12345', :state => 'Georgia'}}.reverse_merge(Factory.attributes_for(:order)))
+        exclusively_mocked_request :post, %r{/orders.xml}, :response => Responses::Order::Order do
+          order = GeoCerts::Order.new(Factory.attributes_for(:order).merge({:organization => {:address => '123 SSL Ave.', :address_2 => 'Suite D', :address_3 => 'tesat', :city => 'Atlanta', :country => 'US', :name => 'Microsoft Inc', :phone => '800-555-1212', :postal_code => '12345', :state => 'Georgia'}}))
           assert_nothing_raised(Exception) { order.save }
         end
       end

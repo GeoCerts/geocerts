@@ -30,7 +30,8 @@ module GeoCerts
   
   def self.api # :nodoc:
     @api = API.new({
-      :version      => 1
+      :version      => 1,
+      :host         => host
     }, {
       :credentials  => [partner_id, api_token]
     })

@@ -21,7 +21,7 @@ class Test::Unit::TestCase
   def managed_server_request(method, path, options = {}, &block)
     case path
     when String
-      uri           = URI.parse(GeoCerts::API::ENDPOINT.gsub(':version', '1') + path)
+      uri           = URI.parse(GeoCerts::API::ENDPOINT.gsub(':host', GeoCerts.host).gsub(':version', '1') + path)
       uri.user      = GeoCerts.partner_id
       uri.password  = GeoCerts.api_token
       FakeWeb.register_uri(method, uri.to_s, options)
