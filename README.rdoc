@@ -8,7 +8,7 @@ more.
 
   require 'geo_certs'
   
-  GeoCerts.login      = 'example'
+  GeoCerts.partner_id = 'example'
   GeoCerts.api_token  = 'abd123DEfg.....'
   
   begin
