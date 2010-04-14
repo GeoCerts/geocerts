@@ -7,16 +7,16 @@ begin
     gem.name        = "geocerts"
     gem.summary     = %Q{A Ruby library for interfacing with the GeoCerts REST API}
     gem.description = %Q{A Ruby library for interfacing with the GeoCerts REST API}
-    gem.email       = "support@geocerts.com"
+    gem.email       = "sslsupport@geocerts.com"
     gem.homepage    = "http://www.geocerts.com/"
     gem.authors     = ["GeoCerts, Inc."]
     
     gem.add_dependency('relax', '>=0.1.2')
     
-    gem.add_development_dependency('thoughtbot-shoulda',      '>=2.10.2')
-    gem.add_development_dependency('thoughtbot-factory_girl', '>=1.2.2')
-    gem.add_development_dependency('mocha',                   '>=0.9.5')
-    gem.add_development_dependency('fakeweb',                 '>=1.2.2')
+    gem.add_development_dependency('shoulda',       '>=2.10.2')
+    gem.add_development_dependency('factory_girl',  '>=1.2.2')
+    gem.add_development_dependency('mocha',         '>=0.9.5')
+    gem.add_development_dependency('fakeweb',       '>=1.2.2')
     
   end
 
