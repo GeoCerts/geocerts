@@ -8,7 +8,7 @@ module GeoCerts
     
       attr_accessor :months,
                     :serial_number,
-                    :order_id,
+                    :geotrust_order_id,
                     :expires_at
       attr_reader   :indicator
     

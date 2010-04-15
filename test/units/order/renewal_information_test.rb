@@ -6,7 +6,7 @@ class GeoCerts::Order::RenewalInformationTest < Test::Unit::TestCase
     
     [ :months,
       :serial_number,
-      :order_id,
+      :geotrust_order_id,
       :expires_at ].each do |method|
         
         should "respond to #{method}" do

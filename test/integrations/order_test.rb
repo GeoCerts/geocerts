@@ -453,7 +453,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal(true,              order.renewal_information.indicator)
           assert_equal(1,                 order.renewal_information.months)
           assert_equal('abC12De',         order.renewal_information.serial_number)
-          assert_equal('1234ab',          order.renewal_information.order_id)
+          assert_equal('1234ab',          order.renewal_information.geotrust_order_id)
           assert_equal(DateTime.parse('2009-01-01T00:00:00Z'), order.renewal_information.expires_at)
         end
       end
@@ -501,7 +501,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal(true,              order.renewal_information.indicator)
           assert_equal(1,                 order.renewal_information.months)
           assert_equal('abC12De',         order.renewal_information.serial_number)
-          assert_equal('1234ab',          order.renewal_information.order_id)
+          assert_equal('1234ab',          order.renewal_information.geotrust_order_id)
           assert_equal(DateTime.parse('2009-01-01T00:00:00Z'), order.renewal_information.expires_at)
         end
       end

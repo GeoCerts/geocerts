@@ -156,7 +156,7 @@ ORDER
                     element :indicator
                     element :months,                                        :type => Integer
                     element 'serial-number',    :as => :serial_number
-                    element 'order-id',         :as => :order_id
+                    element 'geotrust-order-id',:as => :geotrust_order_id
                     element 'expiration-date',  :as => :expires_at,         :type => DateTime
                   end
 

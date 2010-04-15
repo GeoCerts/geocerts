@@ -242,7 +242,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 1248
+Content-Length: 1267
 Vary: Accept-Encoding
 Connection: close
 
@@ -262,7 +262,7 @@ Connection: close
 <indicator type="boolean">true</indicator>
 <months type="integer">1</months>
 <serial-number>abC12De</serial-number>
-<order-id>1234ab</order-id>
+<geotrust-order-id>1234ab</geotrust-order-id>
 <expiration-date type="datetime">2009-01-01T00:00:00Z</expiration-date>
 </renewal-info>
 </order>
