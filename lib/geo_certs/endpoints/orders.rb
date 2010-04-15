@@ -6,7 +6,7 @@ module GeoCerts
     module Orders # :nodoc:
 
       ELEMENTS = <<-ORDER
-      element :id,                                              :type => Integer
+      element :id
       element 'geotrust-order-id',  :as => :geotrust_order_id
       element :domain
       element "status-major",       :as => :status_major
