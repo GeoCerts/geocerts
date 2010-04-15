@@ -330,8 +330,8 @@ module GeoCerts
     ##
     # Returns a collection of events for the order.
     #
-    def events
-      GeoCerts::Event.find_by_order_id(self.id)
+    def events(options = {})
+      GeoCerts::Event.find_by_order_id(self.id, options)
     end
 
     ##
