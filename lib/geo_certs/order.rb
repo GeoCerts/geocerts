@@ -30,7 +30,6 @@ module GeoCerts
                   :ev_approver,
                   :organization,
                   :pending_audit,
-                  :product,
                   :renewal,
                   :renewal_information,
                   :trial
@@ -284,7 +283,13 @@ module GeoCerts
           input
         when String
           Product.find(input)
+        when Hash
+          @_product_id = input[:sku] if input[:sku]; nil
         end
+    end
+    
+    def product
+      @product ||= @_product_id ? Product.find(@_product_id) : nil
     end
 
     ##

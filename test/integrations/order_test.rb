@@ -104,6 +104,17 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
         end
       end
       
+      should 'load the product when requested' do
+        exclusively_mocked_request :get, "/orders/#{@order_id}.xml", :response => Responses::Order::Order do
+          order = GeoCerts::Order.find(@order_id)
+          assert_equal(nil, order.instance_variable_get("@product"))
+          exclusively_mocked_request :get, "/products.xml", :response => Responses::Product::All do
+            assert_kind_of(GeoCerts::Product, order.product)
+            assert_equal('Q', order.product.sku)
+          end
+        end
+      end
+      
     end
     
     context 'find_by_id' do
