@@ -35,7 +35,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal('',                    order.sans)
           assert_equal('COMPLETED',           order.state)
           assert_equal(69.00,                 order.total_price)
-          assert_equal(false,                 order.pending_audit)
+          assert_equal(false,                 order.flagged)
         end
       end
       
@@ -92,7 +92,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal('',                    order.sans)
           assert_equal('COMPLETED',           order.state)
           assert_equal(69.00,                 order.total_price)
-          assert_equal(false,                 order.pending_audit)
+          assert_equal(false,                 order.flagged)
         end
       end
       
@@ -150,7 +150,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal('',                    order.sans)
           assert_equal('COMPLETED',           order.state)
           assert_equal(69.00,                 order.total_price)
-          assert_equal(false,                 order.pending_audit)
+          assert_equal(false,                 order.flagged)
         end
       end
       

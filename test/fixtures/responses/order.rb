@@ -8,7 +8,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 2137
+Content-Length: 2101
 Vary: Accept-Encoding
 Connection: close
 
@@ -29,7 +29,7 @@ Connection: close
 <sans></sans>
 <state>COMPLETED</state>
 <total-price type="float">69</total-price>
-<pending-audit type="boolean">false</pending-audit>
+<flagged type="boolean">false</flagged>
 <product>
   <sku>Q</sku>
 </product>
@@ -49,7 +49,7 @@ Connection: close
 <sans></sans>
 <state>COMPLETED</state>
 <total-price type="float">69</total-price>
-<pending-audit type="boolean">false</pending-audit>
+<flagged type="boolean">false</flagged>
 <product>
   <sku>Q</sku>
 </product>
@@ -69,7 +69,7 @@ Connection: close
 <sans></sans>
 <state>REJECTED</state>
 <total-price type="float">69</total-price>
-<pending-audit type="boolean">false</pending-audit>
+<flagged type="boolean">false</flagged>
 <product>
   <sku>Q</sku>
 </product>
@@ -83,7 +83,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 704
+Content-Length: 692
 Vary: Accept-Encoding
 Connection: close
 
@@ -103,7 +103,7 @@ Connection: close
 <sans></sans>
 <state>COMPLETED</state>
 <total-price type="float">69</total-price>
-<pending-audit type="boolean">false</pending-audit>
+<flagged type="boolean">false</flagged>
 <product>
   <sku>Q</sku>
 </product>
@@ -116,7 +116,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 831
+Content-Length: 820
 Vary: Accept-Encoding
 Connection: close
 
@@ -136,7 +136,7 @@ Connection: close
 <sans></sans>
 <state>COMPLETED</state>
 <total-price type="float">69</total-price>
-<pending-audit type="boolean">false</pending-audit>
+<flagged type="boolean">false</flagged>
 <product>
   <sku>Q</sku>
 </product>

@@ -20,7 +20,7 @@ module GeoCerts
       element :sans
       element :state
       element 'total-price',        :as => :total_price,        :type => Float
-      element 'pending-audit',      :as => :pending_audit
+      element 'flagged'
 
       element :product do
         element :sku

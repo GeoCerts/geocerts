@@ -29,14 +29,14 @@ module GeoCerts
                   :csr,
                   :ev_approver,
                   :organization,
-                  :pending_audit,
+                  :flagged,
                   :renewal,
                   :renewal_information,
                   :trial
 
     alias         :approver= :approver_email=
 
-    force_boolean :pending_audit,
+    force_boolean :flagged,
                   :renewal,
                   :trial
 
