@@ -118,6 +118,7 @@ module GeoCerts
   class RequestFailed       < AllowableExceptionWithResponse; end
   class RequestTimeout      < Exception; end
   class ConnectionError     < Exception; end
+  class ServerError         < ExceptionWithResponse; end
   
   # :startdoc:
   

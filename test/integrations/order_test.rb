@@ -21,7 +21,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       should 'properly populate the order data' do
         exclusively_mocked_request :get, '/orders.xml', :response => Responses::Order::All do
           order = GeoCerts::Order.all.first
-          assert_equal(422815,                order.id)
+          assert_equal('422815',              order.id)
           assert_equal('srv02.wavepath.com',  order.domain)
           assert_equal('93520',               order.geotrust_order_id)
           assert_equal('Complete',            order.status_major)
@@ -78,7 +78,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       should 'properly populate the order data' do
         exclusively_mocked_request :get, "/orders/422815.xml", :response => Responses::Order::Order do
           order = GeoCerts::Order.find(422815)
-          assert_equal(422815,                order.id)
+          assert_equal('422815',              order.id)
           assert_equal('srv02.wavepath.com',  order.domain)
           assert_equal('93520',               order.geotrust_order_id)
           assert_equal('Complete',            order.status_major)
@@ -125,7 +125,7 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
       should 'properly populate the order data' do
         exclusively_mocked_request :get, "/orders/422815.xml", :response => Responses::Order::Order do
           order = GeoCerts::Order.find_by_id(422815)
-          assert_equal(422815,                order.id)
+          assert_equal('422815',              order.id)
           assert_equal('srv02.wavepath.com',  order.domain)
           assert_equal('93520',               order.geotrust_order_id)
           assert_equal('Complete',            order.status_major)

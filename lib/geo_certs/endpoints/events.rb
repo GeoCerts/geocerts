@@ -18,7 +18,7 @@ module GeoCerts
                   
                   elements :event do
                     element 'event-id',             :as => :id,                 :type => Integer
-                    element 'order-id',             :as => :order_id,           :type => Integer
+                    element 'order-id',             :as => :order_id
                     element :name
                     element 'created-at',           :as => :created_at,         :type => DateTime
                   end
@@ -37,7 +37,7 @@ module GeoCerts
                   
                   elements :event do
                     element 'event-id',             :as => :id,                 :type => Integer
-                    element 'order-id',             :as => :order_id,           :type => Integer
+                    element 'order-id',             :as => :order_id
                     element :name
                     element 'created-at',           :as => :created_at,         :type => DateTime
                   end

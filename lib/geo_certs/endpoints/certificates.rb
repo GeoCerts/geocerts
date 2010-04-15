@@ -4,7 +4,7 @@ module GeoCerts
     module Certificates # :nodoc:
       
       ELEMENTS = <<-CERTIFICATE
-      element 'order-id',             :as => :order_id,           :type => Integer
+      element 'order-id',             :as => :order_id
       element 'geotrust-order-id',    :as => :geotrust_order_id
       element :status
       element :certificate

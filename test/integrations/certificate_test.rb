@@ -21,7 +21,7 @@ class GeoCerts::CertificateTest < Test::Unit::TestCase
       should 'properly populate the certificate data' do
         exclusively_mocked_request :get, '/certificates.xml', :response => Responses::Certificate::All do
           certificate = GeoCerts::Certificate.all.first
-          assert_equal(422815,                certificate.order_id)
+          assert_equal('422815',              certificate.order_id)
           assert_equal('93520',               certificate.geotrust_order_id)
           assert_equal('Renewed',             certificate.status)
           assert_equal('www.example.com',     certificate.common_name)
@@ -81,7 +81,7 @@ class GeoCerts::CertificateTest < Test::Unit::TestCase
       should 'properly populate the certificate data' do
         exclusively_mocked_request :get, '/orders/422815/certificate.xml', :response => Responses::Certificate::Certificate do
           certificate = GeoCerts::Certificate.find(422815)
-          assert_equal(422815,                certificate.order_id)
+          assert_equal('422815',              certificate.order_id)
           assert_equal('93520',               certificate.geotrust_order_id)
           assert_equal('Renewed',             certificate.status)
           assert_equal('www.example.com',     certificate.common_name)
@@ -131,7 +131,7 @@ class GeoCerts::CertificateTest < Test::Unit::TestCase
       should 'properly populate the certificate data' do
         exclusively_mocked_request :get, '/orders/422815/certificate.xml', :response => Responses::Certificate::Certificate do
           certificate = GeoCerts::Certificate.find_by_order_id(422815)
-          assert_equal(422815,                certificate.order_id)
+          assert_equal('422815',              certificate.order_id)
           assert_equal('93520',               certificate.geotrust_order_id)
           assert_equal('Renewed',             certificate.status)
           assert_equal('www.example.com',     certificate.common_name)

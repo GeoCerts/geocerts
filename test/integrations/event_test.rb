@@ -24,7 +24,7 @@ class GeoCerts::EventTest < Test::Unit::TestCase
         exclusively_mocked_request :get, '/events.xml', :response => Responses::Event::All do
           event = GeoCerts::Event.all.first
           assert_equal(795652,                                      event.id)
-          assert_equal(422800,                                      event.order_id)
+          assert_equal('422800',                                    event.order_id)
           assert_equal('Approver Confirmed',                        event.name)
           assert_equal(DateTime.parse('2009-08-12T16:38:14-04:00'), event.created_at)
         end
@@ -70,7 +70,7 @@ class GeoCerts::EventTest < Test::Unit::TestCase
         exclusively_mocked_request :get, '/orders/422815/events.xml', :response => Responses::Event::Order do
           event = GeoCerts::Event.find(422815).first
           assert_equal(795652,                                      event.id)
-          assert_equal(422815,                                      event.order_id)
+          assert_equal('422815',                                    event.order_id)
           assert_equal('Approver Confirmed',                        event.name)
           assert_equal(DateTime.parse('2009-08-12T16:38:14-04:00'), event.created_at)
         end
@@ -132,7 +132,7 @@ class GeoCerts::EventTest < Test::Unit::TestCase
         exclusively_mocked_request :get, '/orders/422815/events.xml', :response => Responses::Event::Order do
           event = GeoCerts::Event.find_by_order_id(422815).first
           assert_equal(795652,                                      event.id)
-          assert_equal(422815,                                      event.order_id)
+          assert_equal('422815',                                    event.order_id)
           assert_equal('Approver Confirmed',                        event.name)
           assert_equal(DateTime.parse('2009-08-12T16:38:14-04:00'), event.created_at)
         end
