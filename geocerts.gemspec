@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{geocerts}
-  s.version = "0.0.14"
+  s.version = "0.0.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["GeoCerts, Inc."]
@@ -36,12 +36,14 @@ Gem::Specification.new do |s|
      "lib/geo_certs/endpoints/agreements.rb",
      "lib/geo_certs/endpoints/certificates.rb",
      "lib/geo_certs/endpoints/events.rb",
+     "lib/geo_certs/endpoints/hello.rb",
      "lib/geo_certs/endpoints/orders.rb",
      "lib/geo_certs/endpoints/products.rb",
      "lib/geo_certs/errors.rb",
      "lib/geo_certs/event.rb",
      "lib/geo_certs/exceptions.rb",
      "lib/geo_certs/hash_extension.rb",
+     "lib/geo_certs/hello.rb",
      "lib/geo_certs/order.rb",
      "lib/geo_certs/order/administrator.rb",
      "lib/geo_certs/order/contact.rb",
@@ -61,12 +63,14 @@ Gem::Specification.new do |s|
      "test/fixtures/responses/agreement.rb",
      "test/fixtures/responses/certificate.rb",
      "test/fixtures/responses/event.rb",
+     "test/fixtures/responses/hello.rb",
      "test/fixtures/responses/order.rb",
      "test/fixtures/responses/product.rb",
      "test/integrations/agreement_test.rb",
      "test/integrations/api_test.rb",
      "test/integrations/certificate_test.rb",
      "test/integrations/event_test.rb",
+     "test/integrations/hello_test.rb",
      "test/integrations/order_test.rb",
      "test/integrations/product_test.rb",
      "test/test_helper.rb",
@@ -95,6 +99,7 @@ Gem::Specification.new do |s|
      "test/fixtures/responses/agreement.rb",
      "test/fixtures/responses/certificate.rb",
      "test/fixtures/responses/event.rb",
+     "test/fixtures/responses/hello.rb",
      "test/fixtures/responses/order.rb",
      "test/fixtures/responses/product.rb",
      "test/fixtures/responses.rb",
@@ -102,6 +107,7 @@ Gem::Specification.new do |s|
      "test/integrations/api_test.rb",
      "test/integrations/certificate_test.rb",
      "test/integrations/event_test.rb",
+     "test/integrations/hello_test.rb",
      "test/integrations/order_test.rb",
      "test/integrations/product_test.rb",
      "test/test_helper.rb",
