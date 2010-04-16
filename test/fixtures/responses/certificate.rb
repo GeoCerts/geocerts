@@ -8,7 +8,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK 
 Cache-Control: no-cache 
 Content-Type: application/xml; charset=utf-8 
-Content-Length: 6359 
+Content-Length: 6071 
 Vary: Accept-Encoding 
 Connection: close 
 
@@ -66,8 +66,6 @@ aWNhdGUgQXV0aG9yaXR5MQ0wCwYDVQQDEwRDUkwxMBoGA1UdEAQTMBGBDzIwMTgw
 <organization>GeoCerts</organization>
 <organizational-unit>Internet</organizational-unit>
 <country>US</country>
-<approver-email>ssladmin@example.com</approver-email>
-<reissue-email>test@example.com</reissue-email>
 <trial type="boolean">false</trial>
 <url>https://api-test.geocerts.com/1/orders/422815/certificate.xml</url>
 <dns-names></dns-names>
@@ -124,8 +122,6 @@ A4GBAFjOKer89961zgK5F7WF0bnj4JXMJTENAKaSbn+2kmOeUJXRmm/kEd5jhW6Y
 <organization>srv02.wavepath.com</organization>
 <organizational-unit>Domain Control Validated - QuickSSL Premium(R)</organizational-unit>
 <country>US</country>
-<approver-email>ssladmin@wavepath.com</approver-email>
-<reissue-email>brooks.smith@geocerts.com</reissue-email>
 <trial type="boolean">false</trial>
 <url>https://api-test.geocerts.com/1/orders/422816/certificate.xml</url>
 <dns-names></dns-names>
@@ -138,7 +134,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK 
 Cache-Control: no-cache 
 Content-Type: application/xml; charset=utf-8 
-Content-Length: 3081 
+Content-Length: 2980 
 Vary: Accept-Encoding 
 Connection: close 
 
@@ -195,8 +191,6 @@ aWNhdGUgQXV0aG9yaXR5MQ0wCwYDVQQDEwRDUkwxMBoGA1UdEAQTMBGBDzIwMTgw
 <organization>GeoCerts</organization>
 <organizational-unit>Internet</organizational-unit>
 <country>US</country>
-<approver-email>ssladmin@example.com</approver-email>
-<reissue-email>test@example.com</reissue-email>
 <trial type="boolean">false</trial>
 <url>https://api-test.geocerts.com/1/orders/422815/certificate.xml</url>
 <dns-names></dns-names>

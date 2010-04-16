@@ -18,8 +18,6 @@ module GeoCerts
       element :organization
       element 'organizational-unit',  :as => :organizational_unit
       element :country
-      element 'approver-email',       :as => :approver_email
-      element 'reissue-email',        :as => :reissue_email
       element :trial
       element :url
       element 'dns-names',            :as => :sans
