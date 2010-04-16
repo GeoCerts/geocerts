@@ -59,6 +59,14 @@ module GeoCerts
       @warnings ||= []
     end
     
+    def parameters
+      @parameters ||= {}
+    end
+    
+    def parameters=(value)
+      @parameters = value
+    end
+    
     def response=(response) # :nodoc:
       @response = response
       
@@ -92,6 +100,7 @@ module GeoCerts
       [errors_and_warnings['errors']['warning']].compact.flatten.each do |error|
         self.warnings << GeoCerts::Warning.new(:code => error['code'], :message => error['message'])
       end
+      self.parameters = errors_and_warnings['errors']['parameters']
     end
     
     def decode(content_encoding, body)

@@ -2,6 +2,8 @@ module GeoCerts
   
   class ApiObject # :nodoc:
     
+    attr_accessor :response_parameters
+    
     def initialize(attributes = {}, &block)
       update_attributes(attributes)
       yield(self) if block_given?
@@ -97,6 +99,7 @@ module GeoCerts
     def store_exception_errors_and_warnings(exception)
       self.warnings = exception.warnings  if exception.respond_to?(:warnings)
       self.errors   = exception.errors    if exception.respond_to?(:errors)
+      self.response_parameters = exception.parameters if exception.respond_to?(:parameters)
     end
     
     def update_attributes(attributes) # :nodoc:
