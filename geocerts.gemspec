@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{geocerts}
-  s.version = "0.0.19"
+  s.version = "0.0.20"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["GeoCerts, Inc."]
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
      "lib/geo_certs/endpoints/hello.rb",
      "lib/geo_certs/endpoints/orders.rb",
      "lib/geo_certs/endpoints/products.rb",
+     "lib/geo_certs/endpoints/resellers.rb",
      "lib/geo_certs/errors.rb",
      "lib/geo_certs/event.rb",
      "lib/geo_certs/exceptions.rb",
@@ -52,6 +53,7 @@ Gem::Specification.new do |s|
      "lib/geo_certs/order/renewal_information.rb",
      "lib/geo_certs/parsers/order_parser.rb",
      "lib/geo_certs/product.rb",
+     "lib/geo_certs/reseller.rb",
      "lib/geocerts.rb",
      "test/config/initializers/_remote_tests.rb",
      "test/config/initializers/fakeweb.rb",
