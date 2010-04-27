@@ -123,6 +123,7 @@ ORDER
               parameter 'order[organization][state]',             :as => :organization_state
               parameter 'order[organization][postal_code]',       :as => :organization_postal_code
               parameter 'order[organization][phone]',             :as => :organization_phone
+              parameter 'order[organization][country]',           :as => :organization_country
               
               parser Parsers::OrderParser do
                 element :order do
