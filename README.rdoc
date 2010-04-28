@@ -6,7 +6,7 @@ more.
 
 == Simple example
 
-  require 'geo_certs'
+  require 'geocerts'
   
   GeoCerts.partner_id = 'example'
   GeoCerts.api_token  = 'abd123DEfg.....'
