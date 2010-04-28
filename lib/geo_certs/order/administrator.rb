@@ -8,7 +8,7 @@ module GeoCerts
     # 
     class Administrator < Contact
       
-      def to_geocerts_hash
+      def to_geocerts_hash #:nodoc:
         {
           :administrator_first_name => GeoCerts.escape(self.first_name),
           :administrator_last_name  => GeoCerts.escape(self.last_name),

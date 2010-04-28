@@ -19,7 +19,7 @@ module GeoCerts
         end
       end
       
-      def to_geocerts_hash
+      def to_geocerts_hash #:nodoc:
         {
           :organization_address     => GeoCerts.escape(self.address),
           :organization_address_2   => GeoCerts.escape(self.address_2),

@@ -22,7 +22,7 @@ module GeoCerts
       end
     end
     
-    def to_geocerts_hash
+    def to_geocerts_hash #:nodoc:
       { :csr_body => GeoCerts.escape(self.body) }
     end
     

@@ -7,7 +7,7 @@ module GeoCerts
     # 
     class ExtendedValidationApprover < Contact
       
-      def to_geocerts_hash
+      def to_geocerts_hash #:nodoc:
         {
           :ev_approver_first_name   => GeoCerts.escape(self.first_name),
           :ev_approver_last_name    => GeoCerts.escape(self.last_name),

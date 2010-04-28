@@ -5,7 +5,7 @@ module GeoCerts
     # Used for setting or retrieving the Contact information associated with a 
     # GeoCerts::Order.
     # 
-    class Contact # :nodoc:all
+    class Contact
       
       attr_accessor :email,
                     :first_name,
@@ -20,7 +20,7 @@ module GeoCerts
         end
       end
       
-      def to_geocerts_hash
+      def to_geocerts_hash #:nodoc:
         raise(NotImplementedError)
       end
       

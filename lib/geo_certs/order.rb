@@ -78,7 +78,11 @@ module GeoCerts
     rescue GeoCerts::AllowableExceptionWithResponse
       nil
     end
-
+    
+    ##
+    # Returns a collection of Email addresses which may approve the given
+    # domain.
+    # 
     def self.approvers(domain)
       response = call_api { GeoCerts.api.domain_approvers(:domain => domain) }
       collection = Collection.new

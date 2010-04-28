@@ -58,7 +58,7 @@ module GeoCerts
       })
     end
     
-    def to_geocerts_hash
+    def to_geocerts_hash #:nodoc:
       { :product_sku => GeoCerts.escape(self.sku) }
     end
     
