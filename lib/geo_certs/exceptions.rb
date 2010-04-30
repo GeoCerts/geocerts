@@ -70,12 +70,15 @@ module GeoCerts
     def response=(response) # :nodoc:
       @response = response
       
-      if !response.respond_to?(:body)
-        return @response
-      elsif Hash.respond_to?(:from_xml)
-        build_objects_for(Hash.from_xml(decode(response['content-encoding'], response.body)))
-      else
-        build_objects_for(parse_errors(decode(response['content-encoding'], response.body)))
+      begin
+        if !response.respond_to?(:body)
+          return @response
+        elsif Hash.respond_to?(:from_xml)
+          build_objects_for(Hash.from_xml(decode(response['content-encoding'], response.body)))
+        else
+          build_objects_for(parse_errors(decode(response['content-encoding'], response.body)))
+        end
+      rescue
       end
       
       @response
