@@ -267,7 +267,11 @@ module GeoCerts
     # Sets the renewal information for the order.  This method accepts either
     # a GeoCerts::RenewalInformation instance or a hash of attributes.
     # 
-    def renewal_information=(input)
+    # This should not need to be utilized by the end-user (API developer),
+    # as it is automatically populated by the server when the order is 
+    # populated.
+    # 
+    def renewal_information=(input) #:nodoc:
       case input
       when RenewalInformation
         @renewal_information = input
