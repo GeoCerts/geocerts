@@ -8,7 +8,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 2101
+Content-Length: 2325
 Vary: Accept-Encoding
 Connection: close
 
@@ -33,6 +33,9 @@ Connection: close
 <product>
   <sku>Q</sku>
 </product>
+<approver-email>test@example.co</approver-email>
+<approver-notified-at type="datetime">2009-08-12T16:46:06-04:00</approver-notified-at>
+<approver-confirmed-at type="datetime">2009-08-12T16:46:07-04:00</approver-confirmed-at>
   </order>
   <order>
 <id type="integer">422816</id>
@@ -83,7 +86,7 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 692
+Content-Length: 916
 Vary: Accept-Encoding
 Connection: close
 
@@ -107,6 +110,9 @@ Connection: close
 <product>
   <sku>Q</sku>
 </product>
+<approver-email>test@example.co</approver-email>
+<approver-notified-at type="datetime">2009-08-12T16:46:06-04:00</approver-notified-at>
+<approver-confirmed-at type="datetime">2009-08-12T16:46:07-04:00</approver-confirmed-at>
 </order>
 |
 

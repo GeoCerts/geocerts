@@ -13,6 +13,8 @@ module GeoCerts
   class Order < ApiObject
 
     attr_accessor :approver_email,
+                  :approver_confirmed_at,
+                  :approver_notified_at,
                   :completed_at,
                   :created_at,
                   :domain,

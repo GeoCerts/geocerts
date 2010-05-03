@@ -21,6 +21,9 @@ module GeoCerts
       element :state
       element 'total-price',        :as => :total_price,        :type => Float
       element 'flagged'
+      element 'approver-email',     :as => :approver_email
+      element 'approver-notified-at',   :as => :approver_notified_at,   :type => DateTime
+      element 'approver-confirmed-at',  :as => :approver_confirmed_at,  :type => DateTime
 
       element :product do
         element :sku

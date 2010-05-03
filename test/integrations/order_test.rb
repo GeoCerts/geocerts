@@ -36,6 +36,9 @@ class GeoCerts::OrderTest < Test::Unit::TestCase
           assert_equal('COMPLETED',           order.state)
           assert_equal(69.00,                 order.total_price)
           assert_equal(false,                 order.flagged)
+          assert_equal('test@example.co',     order.approver_email)
+          assert_equal(DateTime.parse('2009-08-12T16:46:07-04:00'), order.approver_confirmed_at)
+          assert_equal(DateTime.parse('2009-08-12T16:46:06-04:00'), order.approver_notified_at)
         end
       end
       
