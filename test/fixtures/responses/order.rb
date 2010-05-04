@@ -248,12 +248,32 @@ Server: Mongrel 1.1.3
 Status: 200 OK
 Cache-Control: no-cache
 Content-Type: application/xml; charset=utf-8
-Content-Length: 1267
+Content-Length: 1905
 Vary: Accept-Encoding
 Connection: close
 
 <?xml version="1.0" encoding="UTF-8"?>
 <order>
+<id type="integer"></id>
+<domain></domain>
+<geotrust-order-id></geotrust-order-id>
+<status-major></status-major>
+<status-minor></status-minor>
+<years type="integer">1</years>
+<licenses type="integer">1</licenses>
+<created-at type="datetime"></created-at>
+<completed-at type="datetime"></completed-at>
+<trial type="boolean">false</trial>
+<renewal type="boolean">false</renewal>
+<sans></sans>
+<state></state>
+<flagged type="boolean"></flagged>
+<product>
+  <sku>Q</sku>
+</product>
+<approver-email></approver-email>
+<approver-notified-at type="datetime"></approver-notified-at>
+<approver-confirmed-at type="datetime"></approver-confirmed-at>
 <total-price type="float">69</total-price>
 <csr>
 <common-name>www.example.com</common-name>

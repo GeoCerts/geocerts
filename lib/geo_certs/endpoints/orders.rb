@@ -144,6 +144,7 @@ ORDER
 
               parser Parsers::OrderParser do
                 element :order do
+                  eval(ELEMENTS)
                   element 'total-price',        :as => :total_price,        :type => Float
 
                   element :csr do
@@ -163,14 +164,6 @@ ORDER
                     element 'geotrust-order-id',:as => :geotrust_order_id
                     element 'expiration-date',  :as => :expires_at,         :type => DateTime
                   end
-
-                  element :warnings do
-                    elements :warning do
-                      element :code, :type => Float
-                      element :message
-                    end
-                  end
-
                 end
               end
             end
