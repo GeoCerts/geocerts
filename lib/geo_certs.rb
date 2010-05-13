@@ -62,9 +62,9 @@ module GeoCerts
     when @_host
       @_host
     when sandbox?
-      'sandbox.geocerts.com'
+      'https://sandbox.geocerts.com'
     else
-      'www.geocerts.com'
+      'https://www.geocerts.com'
     end
   end
   
