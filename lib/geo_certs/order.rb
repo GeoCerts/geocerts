@@ -196,7 +196,7 @@ module GeoCerts
       parameters[:sans]         = GeoCerts.escape(self.sans) if self.sans
       parameters.merge!(self.csr.to_geocerts_hash)      if self.csr
       parameters.merge!(self.product.to_geocerts_hash)  if self.product
-
+      
       update_attributes(self.class.call_api {GeoCerts.api.validate_order(parameters)[:order]})
     rescue GeoCerts::AllowableExceptionWithResponse
       store_exception_errors_and_warnings($!)
@@ -236,7 +236,7 @@ module GeoCerts
     # Returns +true+ if the Order has not been saved.
     #
     def new_record?
-      self.id.nil?
+      self.id.nil? || self.id == ''
     end
 
     ##
@@ -371,7 +371,7 @@ module GeoCerts
       parameters.merge!(self.ev_approver.to_geocerts_hash)    if self.ev_approver
       parameters.merge!(self.administrator.to_geocerts_hash)  if self.administrator
       parameters.merge!(self.organization.to_geocerts_hash)   if self.organization
-
+      
       update_attributes(self.class.call_api {GeoCerts.api.create_order(parameters)[:order]})
       self
     rescue GeoCerts::AllowableExceptionWithResponse
