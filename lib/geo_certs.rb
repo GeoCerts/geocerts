@@ -49,8 +49,23 @@ module GeoCerts
     @sandbox
   end
   
+  def self.sandbox
+    @sandbox
+  end
+  
+  def self.host=(value) #:nodoc:
+    @_host = value
+  end
+  
   def self.host
-    sandbox? ? 'sandbox.geocerts.com' : 'www.geocerts.com'
+    case
+    when @_host
+      @_host
+    when sandbox?
+      'sandbox.geocerts.com'
+    else
+      'www.geocerts.com'
+    end
   end
   
 end

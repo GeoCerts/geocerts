@@ -65,4 +65,12 @@ class Test::Unit::TestCase
     end
   end
   
+  def setting(object, method, options = {})
+    original_value = object.send(method)
+    object.send("#{method}=", options[:to])
+    yield if block_given?
+  ensure
+    object.send("#{method}=", options.has_key?(:back) ? options[:back] : original_value)
+  end
+  
 end
