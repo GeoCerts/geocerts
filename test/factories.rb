@@ -13,3 +13,11 @@ end
 Factory.define :product, :class => GeoCerts::Product do |p|
   p.sku             'Q'
 end
+
+Factory.define :fraud_score, :class => GeoCerts::FraudScore do |f|
+  f.ip              '1.2.3.4'
+  f.city            'Orlando'
+  f.region          'FL'
+  f.postal_code     '32801'
+  f.country         'US'
+end
