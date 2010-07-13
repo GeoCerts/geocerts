@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{geocerts}
-  s.version = "0.0.25"
+  s.version = "0.0.26"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["GeoCerts, Inc."]
-  s.date = %q{2010-05-13}
+  s.date = %q{2010-07-13}
   s.description = %q{A Ruby library for interfacing with the GeoCerts REST API}
   s.email = %q{sslsupport@geocerts.com}
   s.extra_rdoc_files = [
@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
      "lib/geo_certs/endpoints/agreements.rb",
      "lib/geo_certs/endpoints/certificates.rb",
      "lib/geo_certs/endpoints/events.rb",
+     "lib/geo_certs/endpoints/fraud_scores.rb",
      "lib/geo_certs/endpoints/hello.rb",
      "lib/geo_certs/endpoints/orders.rb",
      "lib/geo_certs/endpoints/products.rb",
@@ -43,6 +44,7 @@ Gem::Specification.new do |s|
      "lib/geo_certs/errors.rb",
      "lib/geo_certs/event.rb",
      "lib/geo_certs/exceptions.rb",
+     "lib/geo_certs/fraud_score.rb",
      "lib/geo_certs/hash_extension.rb",
      "lib/geo_certs/hello.rb",
      "lib/geo_certs/order.rb",
@@ -65,6 +67,7 @@ Gem::Specification.new do |s|
      "test/fixtures/responses/agreement.rb",
      "test/fixtures/responses/certificate.rb",
      "test/fixtures/responses/event.rb",
+     "test/fixtures/responses/fraud_score.rb",
      "test/fixtures/responses/hello.rb",
      "test/fixtures/responses/order.rb",
      "test/fixtures/responses/product.rb",
@@ -72,6 +75,7 @@ Gem::Specification.new do |s|
      "test/integrations/api_test.rb",
      "test/integrations/certificate_test.rb",
      "test/integrations/event_test.rb",
+     "test/integrations/fraud_score_test.rb",
      "test/integrations/hello_test.rb",
      "test/integrations/order_test.rb",
      "test/integrations/product_test.rb",
@@ -90,7 +94,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://www.geocerts.com/}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{A Ruby library for interfacing with the GeoCerts REST API}
   s.test_files = [
     "test/config/initializers/_remote_tests.rb",
@@ -101,6 +105,7 @@ Gem::Specification.new do |s|
      "test/fixtures/responses/agreement.rb",
      "test/fixtures/responses/certificate.rb",
      "test/fixtures/responses/event.rb",
+     "test/fixtures/responses/fraud_score.rb",
      "test/fixtures/responses/hello.rb",
      "test/fixtures/responses/order.rb",
      "test/fixtures/responses/product.rb",
@@ -109,6 +114,7 @@ Gem::Specification.new do |s|
      "test/integrations/api_test.rb",
      "test/integrations/certificate_test.rb",
      "test/integrations/event_test.rb",
+     "test/integrations/fraud_score_test.rb",
      "test/integrations/hello_test.rb",
      "test/integrations/order_test.rb",
      "test/integrations/product_test.rb",
@@ -129,7 +135,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<relax>, [">= 0.1.2"])
       s.add_development_dependency(%q<shoulda>, [">= 2.10.2"])
       s.add_development_dependency(%q<factory_girl>, [">= 1.2.2"])
