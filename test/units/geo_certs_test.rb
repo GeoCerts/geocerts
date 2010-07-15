@@ -6,13 +6,13 @@ class GeoCertsTest < Test::Unit::TestCase
     
     should 'use the sandbox host' do
       setting(GeoCerts, :sandbox, :to => true) do
-        assert_equal('sandbox.geocerts.com', GeoCerts.host)
+        assert_equal('https://sandbox.geocerts.com', GeoCerts.host)
       end
     end
     
     should 'use the production host' do
       setting(GeoCerts, :sandbox, :to => false) do
-        assert_equal('www.geocerts.com', GeoCerts.host)
+        assert_equal('https://www.geocerts.com', GeoCerts.host)
       end
     end
     
