@@ -1,5 +1,6 @@
 require 'relax'
 require 'cgi'
+require 'date'
 
 ##
 # To properly configure the GeoCerts library, you must provide your partner ID and api token:
