@@ -1,0 +1,45 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://%{PARTNER_ID}:%{API_TOKEN}@sandbox.geocerts.com:443/1/products/BAD/agreement.xml
+    body: 
+    headers: 
+      accept: 
+      - application/xml
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 422
+      message: Unprocessable Entity
+    headers: 
+      x-powered-by: 
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.0
+      connection: 
+      - keep-alive
+      content-type: 
+      - application/xml; charset=utf-8
+      server: 
+      - nginx/0.8.52 + Phusion Passenger 3.0.0 (mod_rails/mod_rack)
+      x-runtime: 
+      - "5"
+      content-length: 
+      - "177"
+      set-cookie: 
+      - _geocerts_sec=5cd7b1cc76a2a4defe5b3d6107482c48; path=/; secure
+      - _fresh_session=2419fe88920a026c3aecf3df4871003c; path=/; HttpOnly
+      cache-control: 
+      - no-cache
+      status: 
+      - "422"
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <errors>
+        <error>
+          <code type="integer">-90000</code>
+          <message>Unrecognized product code requested</message>
+        </error>
+      </errors>
+
+    http_version: "1.1"
