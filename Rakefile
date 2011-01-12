@@ -1,28 +1,5 @@
-require 'rubygems'
-require 'rake'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name        = "geocerts"
-    gem.summary     = %Q{A Ruby library for interfacing with the GeoCerts REST API}
-    gem.description = %Q{A Ruby library for interfacing with the GeoCerts REST API}
-    gem.email       = "sslsupport@geocerts.com"
-    gem.homepage    = "http://www.geocerts.com/"
-    gem.authors     = ["GeoCerts, Inc."]
-    
-    gem.add_dependency('relax', '>=0.1.2')
-    
-    gem.add_development_dependency('shoulda',       '>=2.10.2')
-    gem.add_development_dependency('factory_girl',  '>=1.2.2')
-    gem.add_development_dependency('mocha',         '>=0.9.5')
-    gem.add_development_dependency('fakeweb',       '>=1.2.2')
-    
-  end
-
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
-end
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
@@ -45,8 +22,6 @@ rescue LoadError
 end
 
 
-
-
 task :default => :test
 
 require 'rake/rdoctask'
@@ -67,4 +42,3 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('LICENSE*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
