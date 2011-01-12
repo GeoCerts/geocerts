@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency 'shoulda', '>=2.10.2'
-  s.add_development_dependency 'factory_girl', '>=1.2.2'
-  s.add_development_dependency 'mocha', '>=0.9.5'
-  s.add_development_dependency 'fakeweb', '>=1.2.2'
+  s.add_development_dependency 'shoulda', '~>2.11.0'
+  s.add_development_dependency 'factory_girl', '~>1.3.0'
+  s.add_development_dependency 'mocha', '~>0.9.0'
+  s.add_development_dependency 'fakeweb', '~>1.3.0'
 
-  s.add_dependency 'relax', '>=0.1.2'
+  s.add_dependency 'relax', '~>0.1.0'
 end
