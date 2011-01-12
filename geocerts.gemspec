@@ -22,7 +22,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'shoulda', '~>2.11.0'
   s.add_development_dependency 'factory_girl', '~>1.3.0'
   s.add_development_dependency 'mocha', '~>0.9.0'
+  s.add_development_dependency 'vcr', '~>1.5.0'
   s.add_development_dependency 'fakeweb', '~>1.3.0'
 
   s.add_dependency 'relax', '~>0.1.0'
+  s.add_dependency 'libxml-ruby', '~>1.1.0'
 end

@@ -1,18 +1,18 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'rubygems'
+$:.unshift(File.expand_path('..', __FILE__))
+$:.unshift(File.expand_path('../../lib', __FILE__))
+
+require 'bundler'
+Bundler.setup
 
 require 'geo_certs'
-
-require 'test/unit'
-require 'uri'
 require 'shoulda'
+require 'mocha'
 require 'factory_girl'
 require 'factories'
-require 'mocha'
+require 'vcr'
 
 # Load any initializers for testing.
-Dir[File.dirname(__FILE__) + '/config/initializers/**/*.rb'].sort.each do |initializer|
+Dir[File.expand_path('../config/initializers/**/*.rb', __FILE__)].sort.each do |initializer|
   require initializer
 end
 
