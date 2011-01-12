@@ -14,6 +14,7 @@ module GeoCerts
                   :status,
                   :certificate,
                   :ca_root,
+                  :ca_intermediates,
                   :common_name,
                   :serial_number,
                   :start_at,
@@ -81,6 +82,10 @@ module GeoCerts
           :csr_body => GeoCerts.escape(csr || '')
         })
       })
+    end
+
+    def ca_intermediates=(input) #:nodoc:
+      @ca_intermediates = input[:ca_intermediate].to_a
     end
     
   end

@@ -1,0 +1,117 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://%{PARTNER_ID}:%{API_TOKEN}@sandbox.geocerts.com:443/1/certificates.xml
+    body: 
+    headers: 
+      accept: 
+      - application/xml
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      etag: 
+      - "\"e684047018da161102e57acfb8277676\""
+      x-powered-by: 
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.0
+      connection: 
+      - keep-alive
+      content-type: 
+      - application/xml; charset=utf-8
+      server: 
+      - nginx/0.8.52 + Phusion Passenger 3.0.0 (mod_rails/mod_rack)
+      x-runtime: 
+      - "28"
+      content-encoding: 
+      - gzip
+      set-cookie: 
+      - _geocerts_sec=5cd7b1cc76a2a4defe5b3d6107482c48; path=/; secure
+      - _fresh_session=486c8bc8f9107acc8b80a90929eb7f3e; path=/; HttpOnly
+      cache-control: 
+      - private, max-age=0, must-revalidate
+      status: 
+      - "200"
+      vary: 
+      - Accept-Encoding
+      transfer-encoding: 
+      - chunked
+    body: !binary |
+      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
+      e6Ozny0UAAA=
+
+    http_version: "1.1"

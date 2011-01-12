@@ -1,0 +1,47 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://%{PARTNER_ID}:%{API_TOKEN}@sandbox.geocerts.com:443/1/certificates.xml?end_at=2009-01-02T00:00:00+00:00&start_at=2009-01-01T00:00:00+00:00
+    body: 
+    headers: 
+      accept: 
+      - application/xml
+      accept-encoding: 
+      - gzip, deflate
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      etag: 
+      - "\"192a165918faf90ed929002efab22bcd\""
+      x-powered-by: 
+      - Phusion Passenger (mod_rails/mod_rack) 3.0.0
+      connection: 
+      - keep-alive
+      content-type: 
+      - application/xml; charset=utf-8
+      server: 
+      - nginx/0.8.52 + Phusion Passenger 3.0.0 (mod_rails/mod_rack)
+      x-runtime: 
+      - "6"
+      content-encoding: 
+      - gzip
+      set-cookie: 
+      - _geocerts_sec=5cd7b1cc76a2a4defe5b3d6107482c48; path=/; secure
+      - _fresh_session=6b48b796fc93d99f55a9a4e12beb2daa; path=/; HttpOnly
+      cache-control: 
+      - private, max-age=0, must-revalidate
+      status: 
+      - "200"
+      vary: 
+      - Accept-Encoding
+      transfer-encoding: 
+      - chunked
+    body: !binary |
+      H4sIAAAAAAAAA7Oxr8jNUShLLSrOzM+zVTLUM1BSSM1Lzk/JzEu3VQoNcdO1
+      ULK347JJTi0qyUzLTE4sSS0GKkiJTyyxVTIyMLDUNTDUNTAKMTCwAiNtMKmk
+      UFySWFSCqsgQXRHQWH1kc+24ANuNPxGOAAAA
+
+    http_version: "1.1"

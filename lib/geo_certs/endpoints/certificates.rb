@@ -9,6 +9,9 @@ module GeoCerts
       element :status
       element :certificate
       element 'ca-root',              :as => :ca_root
+      element 'ca-intermediates',     :as => :ca_intermediates do
+        elements 'ca-intermediate',   :as => :ca_intermediate
+      end
       element 'common-name',          :as => :common_name
       element 'serial-number',        :as => :serial_number
       element 'start-date',           :as => :start_at,           :type => DateTime
