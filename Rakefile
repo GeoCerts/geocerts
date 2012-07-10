@@ -1,7 +1,12 @@
 #!/usr/bin/env rake
 require 'bundler/gem_tasks'
 require 'rake/testtask'
-require 'rake/rdoctask'
+
+begin
+  require 'rdoc/task'
+rescue LoadError
+  require 'rake/rdoctask'
+end
 
 task :default => :test
 
