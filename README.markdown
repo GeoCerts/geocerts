@@ -87,4 +87,6 @@ headers, and response body).
 
 == Copyright
 
-Copyright (c) 2009 {GeoCerts Inc.}[http://www.geocerts.com/]. See LICENSE for details.
+Copyright (c) 2009 [GeoCerts Inc.][geocerts]. See LICENSE for details.
+
+[geocerts]: http://www.geocerts.com/
