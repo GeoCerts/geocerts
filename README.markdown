@@ -33,14 +33,14 @@ GeoCerts.partner_id = 'example'
 GeoCerts.api_token  = 'abd123DEfg.....'
 
 begin
-  GeoCerts::Order.all	                          # => [ GeoCerts::Order, GeoCerts::Order, ... ]
+  GeoCerts::Order.all                           # => [ GeoCerts::Order, GeoCerts::Order, ... ]
   GeoCerts::Order.find(12345).certificate       # => GeoCerts::Certificate
   GeoCerts::Product.all                         # => [ GeoCerts::Product, GeoCerts::Product, ... ]
-  
+
   product = GeoCerts::Product.find('Q')
   product.user_agreement                        # => GeoCerts::Agreement
   puts product.user_agreement.text              # => "...."
-  
+
   # Validate the requested order details
   validated_order = GeoCerts::Order.validate({
     :csr      => GeoCerts::CSR.new(:body => "-----BEGIN CERTIFICATE REQUEST-----\n...."),
@@ -51,7 +51,7 @@ begin
   validated_order.csr.common_name               # => 'www.example.com'
   validated_order.csr.state                     # => 'Georgia'
   validated_order.total_price                   # => 99.00
-  
+
   # Create a new Order
   order = GeoCerts::Order.new({
     :csr      => GeoCerts::CSR.new(:body => "-----BEGIN CERTIFICATE REQUEST-----\n...."),
@@ -59,7 +59,7 @@ begin
     :years    => 3,
     :licenses => 1
   }).save
-  
+
 rescue GeoCerts::Exception
   puts $!.to_s
 end
