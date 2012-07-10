@@ -26,5 +26,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'fakeweb', '~>1.3.0'
 
   s.add_dependency 'relax', '~>0.1.0'
-  s.add_dependency 'libxml-ruby', '~>1.1.0'
+  s.add_dependency 'libxml-ruby', '~>2.0'
 end
