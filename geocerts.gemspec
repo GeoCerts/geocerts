@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "geo_certs/version"
+require File.expand_path("../lib/geo_certs/version", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "geocerts"
@@ -12,11 +11,10 @@ Gem::Specification.new do |s|
   s.summary     = %q{A Ruby library for interfacing with the GeoCerts REST API}
   s.description = %q{A Ruby library for interfacing with the GeoCerts REST API}
 
-  s.rubyforge_project = "geocerts"
-
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = `git ls-files`.split($\)
+  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  s.name          = "geocerts"
   s.require_paths = ["lib"]
 
   s.add_development_dependency 'shoulda', '~>2.11.0'
