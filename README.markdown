@@ -85,7 +85,7 @@ headers, and response body).
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-== Copyright
+## Copyright
 
 Copyright (c) 2009 [GeoCerts Inc.][geocerts]. See LICENSE for details.
 
