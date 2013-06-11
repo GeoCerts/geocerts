@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/geocerts.png)](http://badge.fury.io/rb/geocerts)
 [![Build Status](https://travis-ci.org/GeoCerts/geocerts.png?branch=master)](https://travis-ci.org/GeoCerts/geocerts)
-[![Code Climate](https://codeclimate.com/github/geocerts/geocerts.png)](https://codeclimate.com/github/geocerts/geocerts)
+[![Code Climate](https://codeclimate.com/github/GeoCerts/geocerts.png)](https://codeclimate.com/github/GeoCerts/geocerts)
 
 
 The GeoCerts library provides a Ruby interface to the GeoCerts REST API.  This API allows 
