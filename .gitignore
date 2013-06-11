@@ -16,4 +16,8 @@ test/tmp
 test/version_tmp
 tmp
 
+/.rvmrc
+/.rbenv-version
+/.ruby-gemset
+
 test/config/test_credentials.yml
