@@ -16,3 +16,8 @@ notifications:
     on_failure: always
     rooms:
       - secure: "BujeXOGqK0vfgLzQop2G/IpRnUwCoz5RTuhbms6GMEQDeZGps7f+pbvdpq5/\ntdrWhjZkTs/YZi2ww4HkDV6Wer4+FKf59yleBfkMyluKM93/xst8xBkSLMtv\nYNg7uDvD07XwKuoQYjifv+pwXoNO1mQjwLKLtozJw4cpdm0syDE="
+  hipchat:
+    on_success: change
+    on_failure: always
+    rooms:
+      - secure: "bGsoxAd6xagod+ssRVNmygOIKMg+KPpmL4/qWsH2sAUTIswS78YmkJ6PTsWl\nYkRityfKQftUBsj6uw0S1pG1tXQj2+90TvT0MxNLbnc+fqv7jD/WnYogCv1k\nBsTGPt+I+jl5QyC08mBgfteoMT+8pHxD9JTvM16sUNMcsvgfTn0="
